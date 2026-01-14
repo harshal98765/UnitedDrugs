@@ -6,18 +6,18 @@ import { ChevronLeft, ChevronRight, Pill, Truck, Clock, HeartHandshake, Sparkles
 const services = [
   {
     icon: Pill,
-    title: "Prescription Excellence",
+    title: "Vaccinations",
     description:
-      "Our licensed pharmacists meticulously review and process every prescription with the highest standards of care.",
+      "Get expert consultation on your medicine needs with a licensed pharmacist today.We're here whenever you need us.",
     color: "from-primary/15 to-primary/5",
     accentColor: "text-primary",
     badge: "Premium Service",
   },
   {
     icon: Truck,
-    title: "Express Delivery",
+    title: "Pharmacy Services",
     description:
-      "Same-day processing with priority shipping. Real-time tracking ensures you know exactly where your order is.",
+      "Pharmacy services are essential healthcare services that provide medication, advice, and education to manage health conditions.",
     color: "from-secondary/15 to-secondary/5",
     accentColor: "text-secondary",
     badge: "Fast Track",
@@ -25,15 +25,15 @@ const services = [
   {
     icon: Clock,
     title: "Always Available",
-    description: "Round-the-clock support from our dedicated pharmacy team. We're here whenever you need us.",
+    description: "Round-the-clock support from our dedicated pharmacy team. We're here whenever you need us.Expert consultation on your medicine",
     color: "from-blue-500/15 to-blue-500/5",
     accentColor: "text-blue-600",
     badge: "24/7 Support",
   },
   {
     icon: HeartHandshake,
-    title: "Personalized Care",
-    description: "Health consultations and medication guidance tailored to your unique needs and circumstances.",
+    title: "Telemedicine Clinic",
+    description: "At our pharmacy, we’re dedicated to providing you with not just medications, but with telemedicine services tailored to your individual needs",
     color: "from-orange-400/15 to-orange-400/5",
     accentColor: "text-orange-600",
     badge: "Expert Care",
@@ -82,11 +82,13 @@ export default function ServicesCarousel() {
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-semibold text-primary">WHY CHOOSE US</span>
           </div>
-          <h2 className="hero-title serif-heading text-foreground">
-            Premium Pharmacy
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Services</span>
-          </h2>
+          <h2 className="hero-title serif-heading leading-tight">
+          <span className="text-foreground">What We </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+            Offer
+          </span>
+        </h2>
+
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
             Experience exceptional healthcare solutions designed to exceed your expectations and ensure your wellness.
           </p>

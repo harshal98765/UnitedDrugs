@@ -3,6 +3,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ================================
+   GLOBAL SMOOTH + FAST SCROLLING
+   ================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* matches navbar height (h-20) */
+}
+
+* {
+  scroll-behavior: inherit;
+}
+
+/* ================================
+   THEME VARIABLES
+   ================================ */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -74,6 +89,9 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* ================================
+   THEME BINDINGS
+   ================================ */
 @theme inline {
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
@@ -115,10 +133,14 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ================================
+   BASE LAYER
+   ================================ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

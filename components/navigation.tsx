@@ -2,58 +2,116 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Telemedicine Clinic", href: "/telemedicine" },
+  { label: "Services", href: "/allservice" },
+  { label: "Contact Us", href: "/#contact" }
 ]
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 w-full bg-primary text-primary-foreground shadow-lg z-50 animate-slideInDown">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav
+      className="fixed top-0 w-full
+      bg-gradient-to-r from-emerald-50/90 via-white/80 to-emerald-50/60
+      backdrop-blur-md
+      text-foreground
+      shadow-md
+      h-20
+      z-40
+      animate-slideInDown"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-5">
+        <div className="flex justify-between items-center h-20">
+
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold">💊 DrugDropRx</span>
+            <Link href="/">
+              <img
+                src="/logo.png"
+                alt="Life Care Pharmacy Logo"
+                className="h-14 w-auto object-contain brightness-110 cursor-pointer"
+              />
+            </Link>
           </div>
 
-      
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-secondary transition-colors duration-300">
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-      
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        
-        {isOpen && (
-          <div className="md:hidden pb-4 animate-slideInUp">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block py-2 hover:text-secondary transition-colors"
-                onClick={() => setIsOpen(false)}
+                className="font-medium hover:text-emerald-700 transition-colors"
               >
                 {item.label}
               </Link>
             ))}
+
+            {/* Free Consultation CTA */}
+            <a
+              href="tel:+12014251187"
+              className="flex items-center gap-3 bg-emerald-700 text-white px-5 py-2.5 rounded-lg shadow hover:bg-emerald-800 transition-all"
+            >
+              <span className="bg-white/20 p-2 rounded-md">
+                <Phone size={18} />
+              </span>
+              <div className="leading-tight">
+                <p className="text-sm font-semibold">Free Consultation</p>
+                <p className="text-xs opacity-90">+1 201-425-1187</p>
+              </div>
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+
+        {/* ================= MOBILE MENU ================= */}
+        {isOpen && (
+          <div className="md:hidden relative overflow-hidden animate-slideInUp rounded-b-2xl">
+
+            {/* Gradient Background Layers (Darker than Hero) */}
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/95 via-white/90 to-emerald-100/95" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-200/40 to-emerald-300/50" />
+
+            {/* Content */}
+            <div className="relative z-10 px-2 pb-6 pt-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block py-3 px-3 font-semibold text-foreground hover:text-emerald-800 transition-colors rounded-lg hover:bg-emerald-100/40"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              {/* Mobile CTA */}
+              <a
+                href="tel:+12014251187"
+                className="mt-4 flex items-center justify-center gap-3 bg-emerald-700 text-white px-3 py-3 rounded-xl shadow hover:bg-emerald-800 transition-all"
+              >
+                <Phone size={18} />
+                Free Consultation — +1 201-425-1187
+              </a>
+            </div>
+
           </div>
         )}
+        {/* ================= END MOBILE MENU ================= */}
+
       </div>
     </nav>
   )
 }
-

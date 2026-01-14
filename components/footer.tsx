@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { Heart } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -12,7 +13,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 py-16">
          
           <div>
-            <h3 className="text-2xl font-bold mb-4">💊 DrugDropRx</h3>
+            <Image
+            src="/logo.png"
+            alt="DrugDropRx Logo"
+            width={180}
+            height={60}
+            className="mb-4 object-contain"
+           />
             <p className="text-primary-foreground/80 mb-4">
               Your trusted pharmacy partner for secure, reliable prescription services.
             </p>
@@ -27,18 +34,24 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-primary-foreground transition">
-                  Services
+                <Link href="/about-us" className="hover:text-primary-foreground transition">
+                  About Us
                 </Link>
               </li>
+
               <li>
-                <Link href="#about" className="hover:text-primary-foreground transition">
-                  About
+                <Link href="/telemedicine" className="hover:text-primary-foreground transition">
+                  Telemedicine Clinic
                 </Link>
               </li>
               <li>
                 <Link href="#contact" className="hover:text-primary-foreground transition">
-                  Contact
+                  Services
+                </Link>
+              </li>
+                <li>
+                <Link href="#contact" className="hover:text-primary-foreground transition">
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -103,7 +116,7 @@ export default function Footer() {
 
       
         <div className="py-8 flex flex-col sm:flex-row justify-between items-center text-primary-foreground/80 text-sm">
-          <p>© {currentYear} DrugDropRx. All rights reserved.</p>
+          <p>© {currentYear} LifeCarePharmacy. All rights reserved.</p>
           <p className="flex items-center gap-1 mt-4 sm:mt-0">
             Made with <Heart size={16} className="text-secondary" /> for your health
           </p>

@@ -27,10 +27,21 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-primary/5 to-transparent">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="relative py-20 overflow-hidden">
+
+      {/* Gradient Background Layers */}
+      <div className="absolute inset-0 bg-gradient-to-r from-green-50/90 via-green-50/80 to-green-50/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 to-emerald-200/40" />
+
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-slideInUp">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Why Choose Us</h2>
+          <h2 className="hero-title serif-heading leading-tight mb-4">
+            <span className="text-foreground">Why </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              Choose Us
+            </span>
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             We're committed to providing the highest standard of pharmacy care
           </p>
@@ -50,8 +61,12 @@ export default function FeaturesSection() {
                     <Icon className="text-primary" size={28} />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             )
           })}
