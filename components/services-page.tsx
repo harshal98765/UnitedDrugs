@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function WhatWeOfferSection() {
   const offers = [
@@ -63,11 +64,13 @@ export default function WhatWeOfferSection() {
 
         {/* View More Button */}
         <div className="flex justify-center mt-10 md:mt-10">
-          <button className="bg-[#1B4332] hover:bg-[#0d2818] text-white font-semibold py-3 px-10 rounded-full flex items-center gap-2 transition-all duration-300">
-            View More
-            <ArrowRight size={18} />
-          </button>
-        </div>
+      <Link href="/ALLservice">
+        <button className="bg-[#1B4332] hover:bg-[#0d2818] text-white font-semibold py-3 px-10 rounded-full flex items-center gap-2 transition-all duration-300">
+          View More
+          <ArrowRight size={18} />
+        </button>
+      </Link>
+    </div>
 
       </div>
     </section>
