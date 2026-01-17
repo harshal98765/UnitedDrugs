@@ -1,12 +1,13 @@
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function WhatWeOfferSection() {
   const offers = [
     {
       image: "/medicine01.png",
-      title: "Vitamins & Supplements",
+      title: "Precision Compounding",
       description:
-        "Unlock the power of optimal health with our carefully curated selection of vitamins and supplements, meticulously crafted to support your well-being",
+        "Personalized medications prepared to meet your unique needs, including customized dosages, and allergen-free formulations for better health outcomes.",
     },
     {
       image: "/checkup01.png",
@@ -63,11 +64,13 @@ export default function WhatWeOfferSection() {
 
         {/* View More Button */}
         <div className="flex justify-center mt-10 md:mt-10">
-          <button className="bg-[#1B4332] hover:bg-[#0d2818] text-white font-semibold py-3 px-10 rounded-full flex items-center gap-2 transition-all duration-300">
-            View More
-            <ArrowRight size={18} />
-          </button>
-        </div>
+      <Link href="/ALLservice">
+        <button className="bg-[#1B4332] hover:bg-[#0d2818] text-white font-semibold py-3 px-10 rounded-full flex items-center gap-2 transition-all duration-300">
+          View More
+          <ArrowRight size={18} />
+        </button>
+      </Link>
+    </div>
 
       </div>
     </section>

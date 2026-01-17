@@ -23,7 +23,9 @@ export default function TransferPrescription() {
   const [showTermsModal, setShowTermsModal] = useState(false)
   const [modalAgreed, setModalAgreed] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
@@ -32,112 +34,118 @@ export default function TransferPrescription() {
     setFormData((prev) => ({ ...prev, [name]: checked }))
   }
 
-  const handleMedicationChange = (index: number, field: "name" | "rxNumber", value: string) => {
+  const handleMedicationChange = (
+    index: number,
+    field: "name" | "rxNumber",
+    value: string
+  ) => {
     const updated = [...formData.prescriptions]
     updated[index] = { ...updated[index], [field]: value }
     setFormData((prev) => ({ ...prev, prescriptions: updated }))
   }
 
   const addMedication = () => {
-    setFormData((prev) => ({ ...prev, prescriptions: [...prev.prescriptions, { name: "", rxNumber: "" }] }))
-  }
-
-  const buildPrescriptionsString = () => {
-    if (formData.transferAllMedications) return ""
-    const lines = formData.prescriptions
-      .map((m) => {
-        const name = (m.name || "").trim()
-        const rx = (m.rxNumber || "").trim()
-        if (!name && !rx) return null
-        if (name && rx) return `${name}, ${rx}`
-        if (name) return name
-        return rx
-      })
-      .filter(Boolean) as string[]
-    return lines.join(", ")
+    setFormData((prev) => ({
+      ...prev,
+      prescriptions: [...prev.prescriptions, { name: "", rxNumber: "" }],
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-    setSubmitted(false)
+  e.preventDefault()
+  setError("")
+  setSubmitted(false)
 
-    if (!formData.firstName.trim()) return setError("First name is required")
-    if (!formData.lastName.trim()) return setError("Last name is required")
-    if (!formData.phone.trim()) return setError("Phone is required")
-    if (!formData.birthday.trim()) return setError("Date of birth is required")
-    if (!formData.previousPharmacyName.trim()) return setError("Previous pharmacy name is required")
-    if (!formData.previousPharmacyPhone.trim()) return setError("Previous pharmacy phone is required")
-    if (!formData.termsAgreed) return setError("Please accept Terms of Service")
+  if (!formData.firstName.trim()) return setError("First name is required")
+  if (!formData.lastName.trim()) return setError("Last name is required")
+  if (!formData.phone.trim()) return setError("Phone is required")
+  if (!formData.birthday.trim()) return setError("Date of birth is required")
+  if (!formData.previousPharmacyName.trim())
+    return setError("Previous pharmacy name is required")
+  if (!formData.previousPharmacyPhone.trim())
+    return setError("Previous pharmacy address is required")
+  if (!formData.termsAgreed)
+    return setError("Please accept Terms of Service")
 
-    if (!formData.transferAllMedications) {
-      const hasAny = formData.prescriptions.some((m) => (m.name || "").trim() || (m.rxNumber || "").trim())
-      if (!hasAny) return setError("Please add at least one medication or select Transfer all prescriptions")
-    }
+  if (!formData.transferAllMedications) {
+    const hasValid = formData.prescriptions.some(
+      (m) => m.name.trim() && m.rxNumber.trim()
+    )
+    if (!hasValid)
+      return setError("Each prescription must have name and Rx number")
+  }
 
-    const prescriptionsString = buildPrescriptionsString()
-    const formatPhone = (phone: string) => phone.trim().replace(/[^\d]/g, "")
+  const formatPhone = (phone: string) =>
+    phone.replace(/[^\d]/g, "")
 
-    const payload: any = {
-      patient: {
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
-        phone: formatPhone(formData.phone),
-        dob: formData.birthday,
-      },
-      previousPharmacy: {
-        name: formData.previousPharmacyName.trim(),
-        address: formatPhone(formData.previousPharmacyPhone),
-      },
-      prescriptions: {
-        name: prescriptionsString || "Transfer all prescriptions",
-        rxnumber: formData.transferAllMedications ? "ALL" : "",
-      },
-      notes: formData.notes?.trim() || "",
-    }
+  const payload = {
+    patient: {
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      phone: formatPhone(formData.phone),
+      dob: formData.birthday,
+    },
+    previousPharmacy: {
+      name: formData.previousPharmacyName.trim(),
+      address: formData.previousPharmacyPhone.trim(),
+    },
+    prescriptions: formData.transferAllMedications
+      ? [
+          {
+            name: "ALL",
+            rxnumber: "ALL",
+          },
+        ]
+      : formData.prescriptions
+          .filter((m) => m.name.trim() && m.rxNumber.trim())
+          .map((m) => ({
+            name: m.name.trim(),
+            rxnumber: m.rxNumber.trim(), // 🔥 LOWERCASE (backend-required)
+          })),
+    notes: formData.notes.trim(),
+  }
 
-    try {
-      setLoading(true)
-      const response = await fetch("https://rxflow-backend.onrender.com/api/mail/transfer", {
+  try {
+    setLoading(true)
+
+    const response = await fetch(
+      "https://rxflow-backend.onrender.com/api/mail/transfer",
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-      })
-
-      let data: any = null
-      const contentType = response.headers.get("content-type") || ""
-      if (contentType.includes("application/json")) {
-        data = await response.json()
-      } else {
-        const text = await response.text()
-        data = { success: false, message: text || "Server error" }
       }
+    )
 
-      if (!response.ok || data?.success === false) {
-        throw new Error(data?.message || `Failed with status ${response.status}`)
-      }
+    const data = await response.json()
+    console.log("API RESPONSE:", data)
 
-      setSubmitted(true)
-      setFormData({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        birthday: "",
-        previousPharmacyName: "",
-        previousPharmacyPhone: "",
-        transferAllMedications: false,
-        prescriptions: [{ name: "", rxNumber: "" }],
-        notes: "",
-        termsAgreed: false,
-      })
-
-      setTimeout(() => setSubmitted(false), 5000)
-    } catch (err: any) {
-      setError(err?.message || "Failed to submit transfer request")
-    } finally {
-      setLoading(false)
+    if (!response.ok) {
+      throw new Error(data?.message || "Request failed")
     }
+
+    setSubmitted(true)
+    setFormData({
+      firstName: "",
+      lastName: "",
+      phone: "",
+      birthday: "",
+      previousPharmacyName: "",
+      previousPharmacyPhone: "",
+      transferAllMedications: false,
+      prescriptions: [{ name: "", rxNumber: "" }],
+      notes: "",
+      termsAgreed: false,
+    })
+
+    setTimeout(() => setSubmitted(false), 5000)
+  } catch (err: any) {
+    setError(err.message || "Failed to submit transfer request")
+  } finally {
+    setLoading(false)
   }
+}
+
 
   return (
     <div className="relative min-h-screen py-12 px-4 sm:px-6 lg:px-8">

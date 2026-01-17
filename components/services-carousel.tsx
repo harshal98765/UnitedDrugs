@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Pill, Truck, Clock, HeartHandshake, Sparkles } from "lucide-react"
+import Link from "next/link"
 
 const services = [
    {
@@ -128,10 +129,12 @@ export default function ServicesCarousel() {
                           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
                             {service.description}
                           </p>
+                          <Link href="/ALLservice">
                           <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:-translate-y-1 mt-2">
                             Learn More
                             <ChevronRight className="w-4 h-4" />
                           </button>
+                        </Link>
                         </div>
                       </div>
                     </div>

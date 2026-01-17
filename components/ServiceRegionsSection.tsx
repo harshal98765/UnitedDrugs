@@ -55,7 +55,7 @@ export default function MapsSection() {
                   <MapPin className="w-5 h-5 text-secondary" />
                 </div>
                 <p className="font-semibold text-foreground text-lg">
-                  New Jersey, New York, Pennsylvania
+                  New Jersey, New York
                 </p>
               </div>
 

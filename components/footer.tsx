@@ -48,11 +48,6 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/telemedicine" className="hover:text-primary-foreground transition">
-                    Telemedicine Clinic
-                  </Link>
-                </li>
-                <li>
                   <Link href="#contact" className="hover:text-primary-foreground transition">
                     Services
                   </Link>
