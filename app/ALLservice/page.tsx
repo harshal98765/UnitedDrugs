@@ -27,9 +27,8 @@ export default function ServicesPage() {
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              "Prescription fulfillment", "Compounding services", "Specialty medications",
-              "Workers’ comp & Auto", "Vaccinations", "Pain management",
-              "Diabetes care", "Mental health", "Women’s health"
+              "Prescription fulfillment", "Compounding services", "Specialty medications", "Vaccinations", "Pain management",
+              "Diabetes care", "Mental health", "Women’s health","Hormone therapy","Auto accident prescriptions"
             ].map((item) => (
               <li key={item} className="flex items-center space-x-2 text-slate-700">
                 <span className="h-2 w-2 bg-green-500 rounded-full" />
@@ -91,7 +90,7 @@ export default function ServicesPage() {
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              "Autoimmune Conditions", "Hormone Therapy", "Chronic Pain",
+              "Autoimmune Conditions", "Hormone Therapy", "Chronic Pain Management",
               "Metabolic Disorders", "Mental Health", "Specialty Injectables"
             ].map((spec) => (
               <div key={spec} className="bg-green-700/50 flex justify-center items-center backdrop-blur-sm border border-green-600 p-4 rounded-lg">
