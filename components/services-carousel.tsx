@@ -27,7 +27,7 @@ const services = [
     icon: Pill,
     title: "Vaccinations",
     description:
-      "Get expert consultation on your medicine needs with a licensed pharmacist today.We're here whenever you need us.",
+      "Get expert consultation on your medicine needs with a licensed pharmacist today. We're here whenever you need us.",
     color: "from-primary/15 to-primary/5",
     accentColor: "text-primary",
     badge: "Premium Service",

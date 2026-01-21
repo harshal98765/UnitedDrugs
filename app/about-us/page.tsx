@@ -4,6 +4,7 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Users, Pill, CheckCircle, Stethoscope, Leaf, Building, Heart } from "lucide-react"
+import service1 from "../ALLservice/service1.jpg"
 
 function useScrollAnimation() {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -262,8 +263,8 @@ function PharmacistSection() {
           >
             <div className="relative h-96 md:h-full min-h-96">
               <Image
-                src="/7.jpeg"
-                alt="Uzair Chachar - Lead Pharmacist"
+                src={service1}
+                alt="Lead Pharmacist"
                 fill
                 className="object-cover rounded-xl shadow-lg"
               />
