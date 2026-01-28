@@ -215,7 +215,7 @@ export default function Footer() {
 
               {legalType === "contact" && (
                 <>
-                  <p className="font-semibold text-gray-900">LifeCare Pharmacy</p>
+                  <p className="font-semibold text-gray-900">Life Care Pharmacy</p>
                   <p>
                     Phone:{" "}
                     <a href="tel:+12014251187" className="text-blue-600 underline">

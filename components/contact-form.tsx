@@ -2,7 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin, HelpCircle } from "lucide-react"
+import Link from "next/link"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,9 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
     setError("")
@@ -28,7 +31,6 @@ export default function ContactForm() {
     setError("")
     setSubmitted(false)
 
-    // Basic frontend validation
     if (
       !formData.firstName ||
       !formData.lastName ||
@@ -43,24 +45,21 @@ export default function ContactForm() {
     try {
       setLoading(true)
 
-      const response = await fetch("https://rxflow-backend-80te.onrender.com/api/mail/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+      const response = await fetch(
+        "https://rxflow-backend-80te.onrender.com/api/mail/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      )
 
       const data = await response.json()
 
-      console.log("CONTACT API STATUS:", response.status)
-      console.log("CONTACT API RESPONSE:", data)
-
       if (!response.ok) {
-        throw new Error(data?.message || "Failed to send message. Please try again.")
+        throw new Error(data?.message || "Failed to send message.")
       }
 
-      // SUCCESS
       setSubmitted(true)
       setFormData({
         firstName: "",
@@ -70,13 +69,9 @@ export default function ContactForm() {
         message: "",
       })
 
-      setTimeout(() => {
-        setSubmitted(false)
-      }, 5000)
-
+      setTimeout(() => setSubmitted(false), 5000)
     } catch (err: any) {
-      console.error("CONTACT API Error:", err)
-      setError(err?.message || "Something went wrong. Please try again.")
+      setError(err?.message || "Something went wrong.")
     } finally {
       setLoading(false)
     }
@@ -85,17 +80,17 @@ export default function ContactForm() {
   return (
     <section id="contact" className="relative py-20 overflow-hidden">
 
-      {/* Gradient Background Layers */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-r from-green-50/90 via-green-50/80 to-green-50/70" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 to-emerald-200/40" />
 
-      {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-          {/* Contact Info */}
+          {/* ================= CONTACT INFO ================= */}
           <div className="animate-slideInUp">
-            <h2 className="hero-title serif-heading text-4xl md:text-5xl font-bold text-foreground leading-tight mb-8">
+
+            <h2 className="hero-title serif-heading text-foreground leading-tight mb-8">
               Get In{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                 Touch
@@ -103,56 +98,77 @@ export default function ContactForm() {
             </h2>
 
             <div className="space-y-8">
+
+              {/* PHONE */}
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
-                    <Phone className="text-primary" size={24} />
-                  </div>
+                <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Phone className="text-primary" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Phone</h3>
+                  <h3 className="text-lg font-semibold text-foreground">Phone</h3>
                   <p className="text-muted-foreground">+1 201-425-1187</p>
-                  <p className="text-sm text-muted-foreground">Available on Extended hours</p>
+                  <p className="text-sm text-muted-foreground">
+                    Available on extended hours
+                  </p>
                 </div>
               </div>
 
+              {/* EMAIL */}
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-secondary/10">
-                    <Mail className="text-secondary" size={24} />
-                  </div>
+                <div className="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+                  <Mail className="text-secondary" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Email</h3>
-                  <p className="text-muted-foreground">Lifecarepharmacyllc@gmail.com</p>
-                  <p className="text-sm text-muted-foreground">We'll respond within 2 hours</p>
+                  <h3 className="text-lg font-semibold text-foreground">Email</h3>
+                  <p className="text-muted-foreground">
+                    Lifecarepharmacyllc@gmail.com
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Response within 2 hours
+                  </p>
                 </div>
               </div>
 
+              {/* LOCATION */}
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-accent/10">
-                    <MapPin className="text-accent" size={24} />
-                  </div>
+                <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <MapPin className="text-accent" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">Location</h3>
-                  <p className="text-muted-foreground">3199 John F. Kennedy Blvd, Jersey City</p>
-                  <p className="text-sm text-muted-foreground">NJ 07306, United States</p>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    Location
+                  </h3>
+                  <p className="text-muted-foreground">
+                    3199 John F. Kennedy Blvd
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Jersey City, NJ 07306
+                  </p>
                 </div>
               </div>
+
+              {/* ✅ FAQ BUTTON */}
+              <Link href="/faqs">
+                <button className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-primary-foreground bg-gradient-to-r from-primary to-secondary shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <HelpCircle className="w-5 h-5" />
+                  Visit Our FAQs
+                </button>
+              </Link>
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* CONTACT FORM */}
           <div className="animate-slideInUp" style={{ animationDelay: "0.2s" }}>
             <div className="bg-white rounded-2xl shadow-2xl p-8 border border-border">
+
               {submitted ? (
                 <div className="animate-fadeInScale text-center py-12">
-                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-secondary/20 mb-6">
-                    <Mail className="text-secondary" size={32} />
+                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-700/20 mb-6">
+                    <Mail className="text-blue-700" size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Message Sent!</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
+                    Message Sent!
+                  </h3>
                   <p className="text-muted-foreground">
                     Thank you for reaching out. We'll get back to you soon.
                   </p>
@@ -173,8 +189,7 @@ export default function ContactForm() {
                       value={formData.firstName}
                       onChange={handleChange}
                       placeholder="First Name"
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                      required
+                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-green-900 focus:ring-2 focus:ring-green-900/20 transition-all"
                     />
                     <input
                       type="text"
@@ -182,8 +197,7 @@ export default function ContactForm() {
                       value={formData.lastName}
                       onChange={handleChange}
                       placeholder="Last Name"
-                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                      required
+                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-green-900 focus:ring-2 focus:ring-green-900/20 transition-all"
                     />
                   </div>
 
@@ -193,8 +207,7 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email Address"
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    required
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-green-900 focus:ring-2 focus:ring-green-900/20 transition-all"
                   />
 
                   <input
@@ -203,8 +216,7 @@ export default function ContactForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    required
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-green-900 focus:ring-2 focus:ring-green-900/20 transition-all"
                   />
 
                   <textarea
@@ -213,19 +225,34 @@ export default function ContactForm() {
                     onChange={handleChange}
                     placeholder="Your Message"
                     rows={5}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
-                    required
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:border-green-900 focus:ring-2 focus:ring-green-900/20 transition-all resize-none"
                   />
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-primary text-primary-foreground font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="
+                      w-full
+                      bg-green-900
+                      text-white
+                      font-bold
+                      py-3
+                      px-6
+                      rounded-lg
+                      hover:bg-green-800
+                      transition-all
+                      duration-300
+                      transform
+                      hover:scale-105
+                      active:scale-95
+                      disabled:opacity-60
+                    "
                   >
                     {loading ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
+
             </div>
           </div>
 

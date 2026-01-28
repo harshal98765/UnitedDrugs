@@ -263,13 +263,10 @@ function PharmacistSection() {
           >
             <div className="relative h-96 md:h-full min-h-96">
               <Image
-<<<<<<< HEAD
                 src={service1}
                 alt="Lead Pharmacist"
-=======
                 src="/r.png"
                 alt="Uzair Chachar - Lead Pharmacist"
->>>>>>> b269575 (first commits)
                 fill
                 className="object-cover rounded-xl shadow-lg"
               />

@@ -1,76 +1,210 @@
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+'use client'
+
+import { useState } from 'react'
+import { ArrowLeft, ArrowRight, Pill, ClipboardList, HeartPulse } from 'lucide-react'
 
 export default function WhatWeOfferSection() {
   const offers = [
     {
-      image: "/medicine01.png",
-      title: "Precision Compounding",
+      image: '/medicine01.png',
+      title: 'Precision Compounding',
       description:
-        "Personalized medications prepared to meet your unique needs, including customized dosages, and allergen-free formulations for better health outcomes.",
+        'Personalized medications prepared to meet your unique needs, including customized dosages and allergen-free formulations.',
+      color: 'from-emerald-500 to-teal-600',
+      icon: Pill,
     },
     {
-      image: "/checkup01.png",
-      title: "Generic Plan",
+      image: '/checkup01.png',
+      title: 'Generic Plan',
       description:
-        "Discover the perfect prescription for affordable healthcare with our comprehensive range of high-quality generic plans, designed to meet your needs",
+        'Affordable high-quality generic medication plans designed to lower healthcare costs.',
+      color: 'from-green-500 to-emerald-600',
+      icon: ClipboardList,
     },
     {
-      image: "/vaccin01.png",
-      title: "Care Support",
+      image: '/vaccin01.png',
+      title: 'Care Support',
       description:
-        "Ongoing support for managing chronic conditions like diabetes, blood pressure, and thyroid issues with tailored medication plans.",
+        'Ongoing support for diabetes, BP, thyroid and chronic condition management.',
+      color: 'from-teal-500 to-cyan-600',
+      icon: HeartPulse,
     },
   ]
 
+  // ✅ SECOND CARD ACTIVE BY DEFAULT
+  const [active, setActive] = useState(1)
+
+  const prev = () =>
+    setActive((prev) => (prev === 0 ? offers.length - 1 : prev - 1))
+
+  const next = () =>
+    setActive((prev) => (prev === offers.length - 1 ? 0 : prev + 1))
+
   return (
-    <section className="relative z-20 mt-6 md:-mt-10 px-3 sm:px-4 md:px-0">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 bg-gray-50 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4">
 
-        {/* Dark Green Container */}
-        <div className="bg-[#0d8b57] rounded-2xl shadow-2xl px-5 sm:px-8 md:px-12 py-8 md:py-10">
+        {/* HEADER */}
+        <div className="text-center mb-12">
+          <h2 className="hero-title serif-heading text-foreground leading-tight">
+            What We{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              Offer
+            </span>
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0">
-
-            {offers.map((offer, index) => (
-              <div
-                key={index}
-                className={`flex flex-col items-center text-center px-3 sm:px-8 md:px-8
-                ${index !== 0 ? "md:border-l md:border-white/20" : ""}`}
-              >
-                {/* Icon */}
-                <div className="mb-6">
-                  <img
-                    src={offer.image}
-                    alt={offer.title}
-                    className="w-16 h-16 md:w-16 md:h-16 object-contain"
-                  />
-                </div>
-
-                {/* Title */}
-                <h3 className="text-lg md:text-xl font-semibold tracking-wide text-white mb-3">
-                  {offer.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-white/85 text-sm leading-relaxed max-w-md">
-                  {offer.description}
-                </p>
-              </div>
-            ))}
-
-          </div>
+          <p className="text-muted-foreground mt-4 text-lg">
+            Comprehensive pharmacy services tailored for you
+          </p>
         </div>
 
-        {/* View More Button */}
-        <div className="flex justify-center mt-10 md:mt-10">
-      <Link href="/ALLservice">
-        <button className="bg-[#1B4332] hover:bg-[#0d2818] text-white font-semibold py-3 px-10 rounded-full flex items-center gap-2 transition-all duration-300">
-          View More
-          <ArrowRight size={18} />
-        </button>
-      </Link>
-    </div>
+        {/* ================= MOBILE SLIDER ================= */}
+        <div className="block md:hidden relative">
+
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${active * 100}%)`,
+              }}
+            >
+              {offers.map((offer, index) => {
+                const Icon = offer.icon
+                return (
+                  <div
+                    key={index}
+                    className="min-w-full flex justify-center px-4"
+                  >
+                    <div className="w-full max-w-sm h-[420px] rounded-3xl overflow-hidden relative">
+
+                      <div
+                        className="absolute inset-0 bg-center bg-no-repeat opacity-20"
+                        style={{
+                          backgroundImage: `url(${offer.image})`,
+                          backgroundSize: '70%',
+                        }}
+                      />
+
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-80`}
+                      />
+
+                      <div className="relative z-10 h-full p-8 flex flex-col justify-center text-center text-white">
+                        <div className="mx-auto mb-6 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                          <Icon className="w-8 h-8" />
+                        </div>
+
+                        <h3 className="text-2xl font-semibold mb-4">
+                          {offer.title}
+                        </h3>
+
+                        <p className="text-sm text-white/90 leading-relaxed">
+                          {offer.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <button
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2"
+          >
+            <ArrowLeft />
+          </button>
+
+          <button
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2"
+          >
+            <ArrowRight />
+          </button>
+        </div>
+
+        {/* ================= DESKTOP CAROUSEL ================= */}
+        <div className="hidden md:flex relative items-center justify-center">
+
+          <button
+            onClick={prev}
+            className="absolute left-0 z-20 bg-white shadow-lg rounded-full p-3 hover:scale-110 transition"
+          >
+            <ArrowLeft />
+          </button>
+
+          <div className="flex gap-8 transition-transform duration-700">
+            {offers.map((offer, index) => {
+              const isActive = index === active
+              const Icon = offer.icon
+
+              return (
+                <div
+                  key={index}
+                  onClick={() => setActive(index)}
+                  className={`
+                    relative rounded-3xl overflow-hidden cursor-pointer
+                    transition-all duration-700
+                    ${isActive ? 'scale-110 opacity-100' : 'scale-90 opacity-50'}
+                  `}
+                  style={{
+                    width: isActive ? 320 : 260,
+                    height: isActive ? 420 : 360,
+                  }}
+                >
+                  <div
+                    className="absolute inset-0 bg-center bg-no-repeat opacity-20"
+                    style={{
+                      backgroundImage: `url(${offer.image})`,
+                      backgroundSize: '70%',
+                    }}
+                  />
+
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-70`}
+                  />
+
+                  <div className="relative z-10 h-full p-8 flex flex-col justify-center text-center text-white">
+                    <div className="mx-auto mb-6 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                      <Icon className="w-8 h-8" />
+                    </div>
+
+                    <h3 className="text-2xl font-semibold mb-4">
+                      {offer.title}
+                    </h3>
+
+                    {isActive && (
+                      <p className="text-sm text-white/90 leading-relaxed">
+                        {offer.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <button
+            onClick={next}
+            className="absolute right-0 z-20 bg-white shadow-lg rounded-full p-3 hover:scale-110 transition"
+          >
+            <ArrowRight />
+          </button>
+        </div>
+
+        {/* DOTS */}
+        <div className="flex justify-center mt-8 gap-2">
+          {offers.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`h-2 rounded-full transition-all
+                ${i === active ? 'bg-primary w-6' : 'bg-gray-300 w-2'}
+              `}
+            />
+          ))}
+        </div>
 
       </div>
     </section>

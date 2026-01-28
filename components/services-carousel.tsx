@@ -27,11 +27,7 @@ const services = [
     icon: Pill,
     title: "Compounding Services",
     description:
-<<<<<<< HEAD
-      "Get expert consultation on your medicine needs with a licensed pharmacist today. We're here whenever you need us.",
-=======
       "Customized medications prepared to meet individual patient needs, including tailored dosages, alternative forms, and allergen-free solutions for better treatment outcomes.",
->>>>>>> b269575 (first commits)
     color: "from-primary/15 to-primary/5",
     accentColor: "text-primary",
     badge: "Premium Service",
@@ -83,7 +79,7 @@ export default function ServicesCarousel() {
           <h2 className="hero-title serif-heading leading-tight">
           <span className="text-foreground">What We </span>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-            Offer
+            Provide
           </span>
         </h2>
 

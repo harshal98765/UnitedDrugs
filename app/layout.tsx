@@ -3,25 +3,60 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+
 import FloatingCallButton from "@/components/FloatingCallButton"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
-const _playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] })
+const geist = Geist({ subsets: ["latin"] })
+const geistMono = Geist_Mono({ subsets: ["latin"] })
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] })
 
 export const metadata: Metadata = {
-  title: "LifeCarePharmacy Services",
-  description: "Professional pharmacy services with secure prescription handling and fast delivery",
-  generator: "v0.app",
+  title: {
+    default: "Life Care Pharmacy | Trusted Community Pharmacy",
+    template: "%s | Life Care Pharmacy",
+  },
+
+  description:
+    "Life Care Pharmacy in Jersey City, NJ offering free prescription delivery, vaccinations, compounding, and insurance assistance.",
+
+  applicationName: "Life Care Pharmacy",
+
+  metadataBase: new URL("https://lifecarepharmacyrx.com"),
+
+  openGraph: {
+    title: "Life Care Pharmacy",
+    description:
+      "Your Health, Our Priority. Fast, secure, and professional pharmacy services.",
+    url: "https://lifecarepharmacyrx.com",
+    siteName: "Life Care Pharmacy",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Life Care Pharmacy",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Life Care Pharmacy",
+    description:
+      "Fast, secure, and professional pharmacy services in Jersey City, NJ.",
+    images: ["/og-image.png"],
+  },
+
   icons: {
     icon: [
-      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: "/apple-icon.png",
+    apple: "/apple-touch-icon.png",
   },
 }
 
@@ -33,20 +68,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-
-        {/* Navbar */}
         <Navigation />
 
-        {/* Page Content - padding top added to avoid overlap */}
-        <main className="pt-20">
-          {children}
-        </main>
+        {/* Page Content */}
+        <main className="pt-20">{children}</main>
 
-        {/* Footer */}
         <Footer />
-
-        <Analytics />
         <FloatingCallButton />
+        <Analytics />
       </body>
     </html>
   )
