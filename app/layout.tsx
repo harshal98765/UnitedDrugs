@@ -68,15 +68,39 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        <Navigation />
+  <Navigation />
 
-        {/* Page Content */}
-        <main className="pt-20">{children}</main>
+  {/* Structured Data for Google */}
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Pharmacy",
+        "name": "Life Care Pharmacy",
+        "url": "https://lifecarepharmacyrx.com",
+        "logo": "https://lifecarepharmacyrx.com/og-image.png",
+        "image": "https://lifecarepharmacyrx.com/og-image.png",
+        "telephone": "+1-201-425-1187",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "3199 John F Kennedy Blvd",
+          "addressLocality": "Jersey City",
+          "addressRegion": "NJ",
+          "postalCode": "07306",
+          "addressCountry": "US"
+        }
+      }),
+    }}
+  />
 
-        <Footer />
-        <FloatingCallButton />
-        <Analytics />
-      </body>
+  <main className="pt-20">{children}</main>
+
+  <Footer />
+  <FloatingCallButton />
+  <Analytics />
+</body>
+
     </html>
   )
 }
