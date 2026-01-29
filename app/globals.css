@@ -275,3 +275,14 @@
     font-size: 2rem;
   }
 }
+
+/* allow placeholder detection on iOS date */
+input[type="date"] {
+  position: relative;
+}
+
+/* trick Safari into detecting value */
+input[type="date"]:not([value=""]) + span {
+  opacity: 0;
+}
+

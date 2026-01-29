@@ -299,12 +299,33 @@ export default function MedicationAvailabilitySearch() {
                   />
                 </div>
 
+                <div className="relative max-w-[260px] sm:max-w-[240px] md:max-w-full">
+
                 <input
+                  id="dob"
                   name="dob"
                   type="date"
                   required
-                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg"
+                  className="peer w-full px-4 py-3 border-2 border-slate-200 rounded-lg ios-date"
                 />
+
+  {/* Fake placeholder */}
+                <span
+                  className="
+                    pointer-events-none
+                    absolute left-4 top-1/2 -translate-y-1/2
+                    text-slate-400 text-sm
+                    transition-all
+
+                    peer-focus:opacity-0
+                    peer-[&:not(:placeholder-shown)]:opacity-0
+                    md:hidden
+                  "
+                >
+                  Date of Birth
+                </span>
+              </div>
+
 
                 <input
                   name="phone"

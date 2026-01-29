@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Upload, CheckCircle, DollarSign, ShieldCheck } from 'lucide-react'
 
 export default function SavingsCopayHelp() {
+  const [showTerms, setShowTerms] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -164,12 +165,34 @@ const inputStyle =
                 className={inputStyle}
               />
 
-              <input
-                name="dob"
-                required
-                type="date"
-                className={inputStyle}
-              />
+              <div className="relative max-w-[295px] sm:max-w-[220px] md:max-w-full">
+
+  {/* Mobile-only fake placeholder */}
+                <span
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 
+                            pointer-events-none text-sm 
+                            block md:hidden"
+                  id="dob-label"
+                >
+                  Date of Birth
+                </span>
+
+                <input
+                  type="date"
+                  name="dob"
+                  required
+                  onChange={(e) => {
+                    const label = document.getElementById('dob-label')
+                    if (label) label.style.display = e.target.value ? 'none' : 'block'
+                  }}
+                  className={`${inputStyle.replace(
+                    'w-full',
+                    ''
+                  )} ios-date w-[295px] sm:w-[220px] md:w-full`}
+                />
+              </div>
+
+
 
               <input
                 name="phone"
@@ -232,15 +255,28 @@ const inputStyle =
               Was this medication expensive at another pharmacy?
             </label>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
               {['Yes', 'No', 'Not sure'].map((opt) => (
                 <label
-                  key={opt}
-                  className="flex items-center gap-3 border-2 border-slate-200 rounded-xl px-4 py-4 cursor-pointer hover:border-green-400 transition"
-                >
-                  <input type="radio" name="expensiveElsewhere" value={opt} required />
-                  <span>{opt}</span>
-                </label>
+  key={opt}
+  className="
+    flex items-center justify-center gap-2
+    border-2 border-slate-200 rounded-xl
+    px-4 py-4 cursor-pointer
+    hover:border-green-400 transition
+    whitespace-nowrap text-center
+  "
+>
+  <input
+    type="radio"
+    name="expensiveElsewhere"
+    value={opt}
+    required
+  />
+  <span className="font-medium">{opt}</span>
+</label>
+
               ))}
             </div>
           </div>
@@ -275,10 +311,148 @@ const inputStyle =
           </div>
 
           {/* ===== CONSENT ===== */}
-          <label className="flex gap-3 text-sm text-slate-700 bg-green-50 p-5 rounded-xl cursor-pointer">
-            <input type="checkbox" name="consent" value="true" required className="mt-1 accent-green-600" />
-            I authorize Life Care Pharmacy to review available savings options when eligible.
-          </label>
+          <label className="flex gap-3 text-sm text-slate-700 bg-green-50 p-5 rounded-xl cursor-pointer leading-relaxed">
+  <input
+    type="checkbox"
+    name="consent"
+    value="true"
+    required
+    className="mt-1 accent-green-600"
+  />
+
+  <span>
+    I agree to the{" "}
+    <button
+      type="button"
+      onClick={() => setShowTerms(true)}
+      className="text-green-700 font-semibold underline hover:text-green-800"
+    >
+      Terms & Conditions
+    </button>{" "}
+    and authorize Life Care Pharmacy to contact me and process my request
+    in accordance with HIPAA and applicable pharmacy laws.
+  </span>
+</label>
+
+{showTerms && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+
+    <div className="bg-white max-w-3xl w-full h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
+
+
+      {/* HEADER */}
+      <div className="flex justify-between items-center px-6 py-4 border-b">
+        <h2 className="text-xl font-bold text-green-900">
+          Life Care Pharmacy – Website Terms & Conditions
+        </h2>
+
+        <button
+          onClick={() => setShowTerms(false)}
+          className="text-slate-500 hover:text-slate-800 text-2xl"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* BODY */}
+      <div className="flex-1 overflow-y-auto p-6 text-sm text-slate-700 space-y-4 leading-relaxed">
+
+
+        <p className="text-slate-500">
+          Last updated: January 29, 2026
+        </p>
+
+        <p>
+          By accessing or using this website (lifecarepharmacyrx.com),
+          you agree to the following Terms and Conditions. If you do not
+          agree, please do not use this website or submit any forms.
+        </p>
+
+        <h3 className="font-semibold text-green-900">1. General Website Use</h3>
+        <p>
+          This website is operated by:
+          <br />
+          Life Care Pharmacy LLC<br />
+          3199 John F. Kennedy Blvd<br />
+          Jersey City, NJ 07306<br />
+          Phone: 201-425-1187<br />
+          Fax: 201-210-8304
+        </p>
+
+        <h3 className="font-semibold text-green-900">2. No Medical Advice Disclaimer</h3>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Does not constitute medical advice</li>
+          <li>Does not establish a doctor–patient relationship</li>
+          <li>Does not replace consultation with a licensed provider</li>
+        </ul>
+
+        <h3 className="font-semibold text-green-900">3. Prescription Transfers</h3>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Transfers are subject to state and federal law</li>
+          <li>Controlled substances may not be transferable</li>
+          <li>Submission does not guarantee completion</li>
+        </ul>
+
+        <h3 className="font-semibold text-green-900">4. Medication Availability</h3>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Inventory shown is not real-time</li>
+          <li>Availability may change without notice</li>
+          <li>No reservation is created by submission</li>
+        </ul>
+
+        <h3 className="font-semibold text-green-900">5. Pricing Disclaimer</h3>
+        <p>
+          Pricing and copay estimates are not guaranteed and depend on
+          insurance adjudication and pharmacy verification.
+        </p>
+
+        <h3 className="font-semibold text-green-900">6. HIPAA Compliance</h3>
+        <p>
+          Information submitted is protected in accordance with HIPAA
+          regulations and used only for treatment, payment, and
+          healthcare operations.
+        </p>
+
+        <h3 className="font-semibold text-green-900">7. Electronic Communication Consent</h3>
+        <p>
+          You consent to receive communications via phone, SMS, email,
+          or voicemail regarding pharmacy services.
+        </p>
+
+        <h3 className="font-semibold text-green-900">8. Limitation of Liability</h3>
+        <p>
+          Life Care Pharmacy is not liable for delays, shortages,
+          insurance denials, or third-party system failures.
+        </p>
+
+        <h3 className="font-semibold text-green-900">9. Age Requirement</h3>
+        <p>
+          You confirm that you are at least 18 years old or an authorized
+          representative.
+        </p>
+
+        <h3 className="font-semibold text-green-900">10. Changes to Terms</h3>
+        <p>
+          These Terms may be updated at any time. Continued use
+          constitutes acceptance.
+        </p>
+      </div>
+
+      {/* FOOTER */}
+      <div className="border-t px-6 py-4 flex justify-end gap-3">
+        <button
+          onClick={() => setShowTerms(false)}
+          className="px-5 py-2 rounded-lg border border-slate-300 hover:bg-slate-100"
+        >
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+)}
+
+
 
           {/* ===== SUBMIT ===== */}
           <button

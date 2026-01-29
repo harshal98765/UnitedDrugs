@@ -182,8 +182,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-xl text-muted-foreground leading-relaxed font-light max-w-md">
-              Fast, secure, and professional pharmacy services. Submit your prescription and receive your medications
-              with care and precision.
+              Fast, secure, and professional pharmacy services in Jersey City, NJ. Submit your prescription online for care and precise fulfillment.
             </p>
 
             <div className="space-y-4 pt-4">

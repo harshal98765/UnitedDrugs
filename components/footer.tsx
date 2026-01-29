@@ -128,11 +128,23 @@ export default function Footer() {
           <div className="border-t border-primary-foreground/20"></div>
 
           <div className="py-8 flex flex-col sm:flex-row justify-between items-center text-primary-foreground/80 text-sm">
-            <p>© {currentYear} LifeCarePharmacy. All rights reserved.</p>
-            <p className="flex items-center gap-1 mt-4 sm:mt-0">
-              Made with <Heart size={16} className="text-secondary" /> for your health
-            </p>
-          </div>
+  <p>© {currentYear} LifeCarePharmacy. All rights reserved.</p>
+
+  <p className="flex items-center gap-1 mt-4 sm:mt-0">
+    Made with{" "}
+    <a
+      href="https://drugdroprx.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center text-secondary hover:scale-110 transition-transform"
+      aria-label="Visit DrugDropRx website"
+    >
+      <Heart size={16} className="text-secondary cursor-pointer" />
+    </a>
+    {" "}for your health
+  </p>
+</div>
+
         </div>
       </footer>
 
