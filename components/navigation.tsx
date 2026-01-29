@@ -21,18 +21,27 @@ export default function Navigation() {
       {/* ================= TOP ALERT ================= */}
       {showAlert && (
   <div className="fixed top-0 w-full z-41 bg-emerald-700 text-white">
-    <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-center relative">
+    <div className="max-w-7xl mx-auto px-3 py-2 flex items-center justify-center relative">
 
       {/* Centered Text */}
-      <p className="text-base md:text font-semibold text-center">
-        Horizon NJ Health members welcome •{" "}
-        <a
-          href="tel:2018869191"
-          className="underline font-bold hover:text-emerald-200"
-        >
-          Call 201-886-9191
-        </a>
-      </p>
+      <p className="
+  text-[13px] 
+  md:text-base 
+  font-semibold 
+  text-center 
+  whitespace-nowrap 
+  overflow-hidden 
+  text-ellipsis
+">
+  Horizon NJ Health members welcome •{" "}
+  <a
+    href="tel:2018869191"
+    className="underline font-bold hover:text-emerald-200"
+  >
+    Call 201-886-9191
+  </a>
+</p>
+
 
       {/* Close Button (Right Side) */}
       <button

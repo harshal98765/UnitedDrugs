@@ -5,23 +5,23 @@ import Papa from 'papaparse'
 import { Search, Phone, X } from 'lucide-react'
 
 /* =============================== */
-/* MASTER MEDICATION LIST */
-/* =============================== */
-
-
-
-/* =============================== */
 /* COMPONENT */
 /* =============================== */
 
 export default function MedicationAvailabilitySearch() {
+  const [showTerms, setShowTerms] = useState(false)
   const [query, setQuery] = useState('')
   const [selectedMedication, setSelectedMedication] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [medicationList, setMedicationList] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
+  /* =============================== */
+  /* LOAD CSV */
+  /* =============================== */
+
+  useEffect(() => {
     Papa.parse('/drugs.csv', {
       header: true,
       download: true,
@@ -48,12 +48,15 @@ export default function MedicationAvailabilitySearch() {
     })
   }, [])
 
+  /* =============================== */
+  /* FILTER LOGIC */
+  /* =============================== */
 
   const filtered =
     query.length > 0
-      ? medicationList.filter(m =>
-          m.toLowerCase().includes(query.toLowerCase())
-        ).slice(0, 12)
+      ? medicationList
+          .filter((m) => m.toLowerCase().includes(query.toLowerCase()))
+          .slice(0, 12)
       : []
 
   const selectMedication = (med: string) => {
@@ -62,6 +65,61 @@ export default function MedicationAvailabilitySearch() {
     setShowModal(true)
   }
 
+  /* =============================== */
+  /* BACKEND SUBMIT */
+  /* =============================== */
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    const payload = {
+  medicationName: String(
+    formData.get('medicationName') ||
+      selectedMedication ||
+      query ||
+      ''
+  ),
+  firstName: String(formData.get('firstName') || ''),
+  lastName: String(formData.get('lastName') || ''),
+  dob: String(formData.get('dob') || ''),
+  phone: String(formData.get('phone') || ''),
+  email: String(formData.get('email') || ''),
+  consent: true,
+}
+
+
+    try {
+      setLoading(true)
+
+      await fetch(
+        'https://rxflow-backend-80te.onrender.com/api/mail/medication-availability',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }
+      )
+
+      setShowModal(false)
+      setSubmitted(true)
+    } catch (error) {
+      alert('Something went wrong. Please try again.')
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  /* =============================== */
+  /* UI */
+  /* =============================== */
+  
+
   return (
     <section className="min-h-screen bg-gradient-to-b from-green-50 to-white px-4 py-12 md:py-16">
       <div className="max-w-2xl mx-auto">
@@ -69,15 +127,14 @@ export default function MedicationAvailabilitySearch() {
         {/* HEADER */}
         <div className="text-center mb-12">
           <h2 className="serif-heading text-4xl md:text-5xl font-bold text-green-900 mb-4">
-  Find Your Medication
-</h2>
-
+            Find Your Medication
+          </h2>
           <p className="text-base md:text-lg text-slate-600">
             Check availability of your prescription medication at Life Care Pharmacy
           </p>
         </div>
 
-        {/* SEARCH BAR - LARGER */}
+        {/* SEARCH BAR */}
         <div className="relative mb-6">
           <div className="absolute left-5 top-1/2 transform -translate-y-1/2 text-green-600">
             <Search className="w-6 h-6" />
@@ -94,7 +151,7 @@ export default function MedicationAvailabilitySearch() {
             className="w-full pl-14 pr-6 py-4 md:py-5 text-lg md:text-xl border-2 border-green-300 rounded-2xl focus:ring-4 focus:ring-green-400 focus:border-green-600 outline-none transition-all duration-200 shadow-lg"
           />
 
-          {/* SUGGESTIONS DROPDOWN */}
+          {/* SUGGESTIONS */}
           {filtered.length > 0 && !selectedMedication && (
             <div className="absolute z-30 bg-white w-full mt-2 rounded-2xl border-2 border-green-200 shadow-xl max-h-80 overflow-y-auto">
               {filtered.map((med, idx) => (
@@ -115,13 +172,11 @@ export default function MedicationAvailabilitySearch() {
           )}
         </div>
 
-        {/* INFO SECTION - Show when no search or result */}
+        {/* THREE INFO BOXES — RESTORED */}
         {!submitted && !selectedMedication && (
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-2xl p-6 border border-green-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-green-600 mb-3 text-3xl">
-                ✓
-              </div>
+              <div className="text-green-600 mb-3 text-3xl">✓</div>
               <h3 className="text-lg font-bold text-green-900 mb-2">
                 Quick Search
               </h3>
@@ -131,9 +186,7 @@ export default function MedicationAvailabilitySearch() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-green-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-green-600 mb-3 text-3xl">
-                📞
-              </div>
+              <div className="text-green-600 mb-3 text-3xl">📞</div>
               <h3 className="text-lg font-bold text-green-900 mb-2">
                 Easy Confirmation
               </h3>
@@ -143,9 +196,7 @@ export default function MedicationAvailabilitySearch() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-green-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-green-600 mb-3 text-3xl">
-                ⏱️
-              </div>
+              <div className="text-green-600 mb-3 text-3xl">⏱️</div>
               <h3 className="text-lg font-bold text-green-900 mb-2">
                 Quick Response
               </h3>
@@ -182,21 +233,12 @@ export default function MedicationAvailabilitySearch() {
 
             <div className="flex justify-center pt-2">
               <a
-  href="tel:2014251187"
-  className="
-    bg-green-600 hover:bg-green-700 text-white
-    px-5 py-2.5 md:px-8 md:py-4
-    rounded-lg md:rounded-xl
-    font-semibold md:font-bold
-    text-sm md:text-lg
-    flex items-center gap-2 md:gap-3
-    transition-colors duration-200 shadow-lg
-  "
->
-  <Phone className="w-4 h-4 md:w-6 md:h-6" />
-  Call Pharmacy: (201) 425-1187
-</a>
-
+                href="tel:2014251187"
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg"
+              >
+                <Phone className="w-6 h-6" />
+                Call Pharmacy: (201) 425-1187
+              </a>
             </div>
 
             <div className="text-sm text-center text-slate-500 space-y-1 pt-4 border-t border-slate-200">
@@ -211,9 +253,10 @@ export default function MedicationAvailabilitySearch() {
         {showModal && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4 py-8">
             <div className="bg-white rounded-3xl p-8 w-full max-w-md relative shadow-2xl">
+
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute top-6 right-6 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute top-6 right-6 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -223,118 +266,150 @@ export default function MedicationAvailabilitySearch() {
                   Verify Your Information
                 </h3>
                 <p className="text-slate-600 text-base">
-                  We will contact you with availability information for <span className="font-semibold text-green-700">{selectedMedication}</span>
+                  We will contact you regarding{' '}
+                  <span className="font-semibold text-green-700">
+                    {selectedMedication}
+                  </span>
                 </p>
               </div>
 
-             <form
-  onSubmit={(e) => {
-    e.preventDefault()
-    setShowModal(false)
-    setSubmitted(true)
-  }}
-  className="space-y-3 md:space-y-4"
->
+              <form onSubmit={handleSubmit} className="space-y-4">
 
-  {/* Name Fields */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-    <div>
-      <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
-        First Name
-      </label>
-      <input
-        required
-        placeholder="John"
-        className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
-                   focus:border-green-500 focus:ring-4 focus:ring-green-100
-                   outline-none transition-all text-sm md:text-base"
-      />
+                <input
+  name="medicationName"
+  required
+  defaultValue={selectedMedication || query}
+  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg bg-slate-100"
+  placeholder="Medication Name"
+/>
+
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    name="firstName"
+                    required
+                    placeholder="First Name"
+                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg"
+                  />
+                  <input
+                    name="lastName"
+                    required
+                    placeholder="Last Name"
+                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg"
+                  />
+                </div>
+
+                <input
+                  name="dob"
+                  type="date"
+                  required
+                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg"
+                />
+
+                <input
+                  name="phone"
+                  required
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg"
+                />
+
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Email (optional)"
+                  className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg"
+                />
+
+                <label className="flex gap-3 text-sm text-slate-700 p-4 bg-green-50 rounded-lg">
+  <input
+    type="checkbox"
+    required
+    className="w-5 h-5 accent-green-600 mt-0.5"
+  />
+
+  <span className="leading-relaxed">
+    I authorize Life Care Pharmacy to contact me regarding this request.
+    {" "}
+    <button
+      type="button"
+      onClick={() => setShowTerms(true)}
+      className="text-blue-600 underline font-medium hover:text-blue-800"
+    >
+      Terms and Conditions
+    </button>
+    {showTerms && (
+  <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
+    <div className="bg-white max-w-lg w-full rounded-2xl p-6 shadow-2xl relative">
+
+      {/* Close */}
+      <button
+        onClick={() => setShowTerms(false)}
+        className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+      >
+        ✕
+      </button>
+
+      <h3 className="text-xl font-bold text-green-900 mb-4">
+        Terms & Conditions
+      </h3>
+
+      <div className="space-y-3 text-sm text-slate-700 leading-relaxed max-h-[60vh] overflow-y-auto">
+
+        <p>
+          By submitting this form, you confirm that all information provided is
+          accurate, complete, and truthful to the best of your knowledge.
+        </p>
+
+        <p>
+          You authorize Life Care Pharmacy to contact you via phone, text
+          message, or email regarding your prescription inquiry, medication
+          availability, insurance verification, or savings options.
+        </p>
+
+        <p>
+          Information submitted through this form is used solely for pharmacy
+          communication and will not be sold or shared with third parties except
+          as required for prescription processing or insurance verification.
+        </p>
+
+        <p>
+          By continuing, you acknowledge that electronic submission constitutes
+          your consent in accordance with applicable federal and state
+          regulations, including HIPAA privacy guidelines.
+        </p>
+
+      </div>
+
+      <div className="pt-4 text-right">
+        <button
+          onClick={() => setShowTerms(false)}
+          className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold"
+        >
+          I Understand
+        </button>
+      </div>
+
     </div>
-
-    <div>
-      <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
-        Last Name
-      </label>
-      <input
-        required
-        placeholder="Doe"
-        className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
-                   focus:border-green-500 focus:ring-4 focus:ring-green-100
-                   outline-none transition-all text-sm md:text-base"
-      />
-    </div>
   </div>
+)}
 
-  {/* Date Field */}
-  <div>
-    <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
-      Date of Birth
-    </label>
-    <input
-      type="date"
-      required
-      className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
-                 focus:border-green-500 focus:ring-4 focus:ring-green-100
-                 outline-none transition-all text-sm md:text-base"
-    />
-  </div>
+  </span>
+</label>
 
-  {/* Phone Field */}
-  <div>
-    <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
-      Phone Number
-    </label>
-    <input
-      placeholder="(201) 425-1187"
-      required
-      className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
-                 focus:border-green-500 focus:ring-4 focus:ring-green-100
-                 outline-none transition-all text-sm md:text-base"
-    />
-  </div>
 
-  {/* Email Field */}
-  <div>
-    <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1.5 md:mb-2">
-      Email Address
-    </label>
-    <input
-      type="email"
-      placeholder="john@example.com"
-      className="w-full px-3 py-2.5 md:px-4 md:py-3 border-2 border-slate-200 rounded-lg
-                 focus:border-green-500 focus:ring-4 focus:ring-green-100
-                 outline-none transition-all text-sm md:text-base"
-    />
-  </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-bold shadow-lg"
+                >
+                  {loading ? 'Submitting...' : 'Check Availability'}
+                </button>
 
-  {/* Consent Checkbox */}
-  <label className="flex gap-3 text-xs md:text-sm text-slate-700 p-3 md:p-4 bg-green-50 rounded-lg cursor-pointer hover:bg-green-100 transition-colors">
-    <input
-      type="checkbox"
-      required
-      className="w-4 h-4 md:w-5 md:h-5 text-green-600 rounded accent-green-600 cursor-pointer flex-shrink-0 mt-0.5"
-    />
-    <span>
-      I authorize Life Care Pharmacy to contact me regarding this medication request.
-    </span>
-  </label>
-
-  {/* Submit Button */}
-  <button
-    type="submit"
-    className="w-full bg-green-600 hover:bg-green-700 text-white
-               py-3 md:py-4 rounded-xl font-bold
-               text-base md:text-lg
-               transition-colors duration-200 shadow-lg mt-4 md:mt-6"
-  >
-    Check Availability
-  </button>
-
-</form>
-
+              </form>
             </div>
           </div>
         )}
+
       </div>
     </section>
   )
