@@ -37,10 +37,10 @@ export default function Navigation() {
 ">
   Horizon NJ Health members welcome •{" "}
   <a
-    href="tel:2018869191"
+    href="tel:2014251187"
     className="underline font-bold hover:text-emerald-200"
   >
-    Call 201-886-9191
+    Call 201-425-1187
   </a>
 </p>
 
