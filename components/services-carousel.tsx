@@ -87,7 +87,7 @@ export default function ServicesCarousel() {
             </span>
           </div>
 
-          <h2 className="hero-title serif-heading leading-tight">
+          <h2 className="hero-title  leading-tight">
             <span className="text-foreground">What We </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
               Provide
@@ -132,7 +132,7 @@ export default function ServicesCarousel() {
                         </div>
 
                         <div className="space-y-6">
-                          <h3 className="text-4xl md:text-5xl font-bold serif-heading text-foreground leading-tight">
+                          <h3 className="text-4xl md:text-5xl font-bold  text-foreground leading-tight">
                             {service.title}
                           </h3>
 

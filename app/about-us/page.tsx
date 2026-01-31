@@ -3,9 +3,12 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { Users, Pill, CheckCircle, Stethoscope, Leaf, Building, Heart } from "lucide-react"
-import service1 from "../ALLservice/service1.jpg"
+import { Users, Pill, CheckCircle, Stethoscope, Leaf, Building, Heart, ShieldCheck, Award, Microscope, Search } from "lucide-react"
+import about1 from "./about1.jpg"
 
+/**
+ * Custom hook for scroll-triggered animations
+ */
 function useScrollAnimation() {
   const ref = useRef<HTMLDivElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -20,10 +23,7 @@ function useScrollAnimation() {
       { threshold: 0.1 }
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
+    if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
 
@@ -34,162 +34,88 @@ function useScrollAnimation() {
 // HERO SECTION
 // ============================================
 function HeroSection() {
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    setIsLoaded(true)
-  }, [])
-
   return (
-    <section className="relative h-64 sm:h-72 md:h-[420px] w-full overflow-hidden">
-
-      {/* Background image with overlay */}
+    <section className="relative h-[500px] w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <Image src="/1.jpg" alt="About Us Hero" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/60 to-[#D6EBFF]/90" />
       </div>
 
-      {/* Content */}
-      <div
-        className={`relative flex items-center h-full px-6 md:px-16 transition-all duration-1000 ${
-          isLoaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-        }`}
-      >
-        <h1
-  className="
-    font-extrabold tracking-tight leading-tight
-    text-white
-    text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl
-  "
->
-  About{" "}
-  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
-    Us
-  </span>
-</h1>
-
+      <div className="relative text-center px-6 z-10">
+        <h1 className="text-5xl md:text-8xl font-black text-white drop-shadow-md">
+          About <span className="text-[#E8F4FF]">Us</span>
+        </h1>
+        <div className="mt-4 h-1.5 w-24 bg-blue-500 mx-auto rounded-full" />
+        <p className="mt-6 text-blue-50 text-lg max-w-xl mx-auto font-medium">
+          Dedicated to providing healthcare solutions that prioritize your well-being above all else.
+        </p>
       </div>
     </section>
   )
 }
 
 // ============================================
-// STATS SECTION
+// STATS & QUALITY CARE (Aligned Grid)
 // ============================================
-interface StatItem {
-  icon: React.ReactNode
-  number: string
-  label: string
-}
-
-function StatsSection() {
+function InfoGridSection() {
   const { ref, isVisible } = useScrollAnimation()
 
-  const stats: StatItem[] = [
-    { icon: <Users className="w-8 h-8" />, number: "119K+", label: "Happy Patients" },
-    { icon: <Pill className="w-8 h-8" />, number: "29+", label: "Medical Services" },
-    { icon: <CheckCircle className="w-8 h-8" />, number: "149K+", label: "Problems Solved" },
-    { icon: <Stethoscope className="w-8 h-8" />, number: "199", label: "Specialist Doctors" },
+  const stats = [
+    { icon: <Users />, number: "119K+", label: "Happy Patients" },
+    { icon: <Pill />, number: "29+", label: "Medical Services" },
+    { icon: <CheckCircle />, number: "149K+", label: "Problems Solved" },
+    { icon: <Stethoscope />, number: "199", label: "Specialist Doctors" },
+  ]
+
+  const services = [
+    { icon: <Leaf />, title: "Vitamins", desc: "Crafted to support your daily well-being." },
+    { icon: <Building />, title: "Generic Plan", desc: "Affordable healthcare without compromise." },
+    { icon: <Heart />, title: "Vaccinations", desc: "A strong defense against illness." },
   ]
 
   return (
-    <section ref={ref} className="py-12 px-8 md:px-16 -mt-24 relative z-10">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 bg-white rounded-2xl shadow-lg p-8">
-        {stats.map((stat, idx) => (
-          <div
-            key={idx}
-            className={`text-center transition-all duration-700 transform ${
-              isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-            }`}
-            style={{ transitionDelay: `${idx * 100}ms` }}
-          >
-            <div className="flex justify-center mb-3 text-green-700">{stat.icon}</div>
-            <h3 className="text-3xl md:text-4xl font-bold text-green-900 mb-1">{stat.number}</h3>
-            <p className="text-gray-600 text-sm uppercase tracking-wide">{stat.label}</p>
+    <section ref={ref} className="py-16 px-6 max-w-7xl mx-auto relative z-20">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+
+        {/* Card 1: Our Impact */}
+        <div className={`flex flex-col bg-white rounded-3xl shadow-xl p-8 transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-2xl font-bold text-blue-900 mb-8 border-l-4 border-blue-400 pl-4">Our Impact</h2>
+          <div className="grid grid-cols-2 gap-8 flex-grow">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-left">
+                <div className="text-blue-600 mb-2">{stat.icon}</div>
+                <div className="text-2xl font-bold text-gray-800">{stat.number}</div>
+                <div className="text-xs uppercase text-gray-500 font-semibold">{stat.label}</div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </section>
-  )
-}
+        </div>
 
-// ============================================
-// QUALITY CARE SECTION
-// ============================================
-interface ServiceItem {
-  icon: React.ReactNode
-  title: string
-  description: string
-}
-
-function QualityCareSection() {
-  const { ref, isVisible } = useScrollAnimation()
-
-  const services: ServiceItem[] = [
-    {
-      icon: <Leaf className="w-6 h-6" />,
-      title: "Vitamins & Supplements",
-      description:
-        "Unlock the power of optimal health with our carefully curated selection of vitamins and supplements, meticulously crafted to support your well-being",
-    },
-    {
-      icon: <Building className="w-6 h-6" />,
-      title: "Generic Plan",
-      description:
-        "Discover the perfect prescription for affordable healthcare with our comprehensive range of high-quality generic plans, designed to meet your needs without compromising on quality",
-    },
-    {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Vaccinations",
-      description:
-        "Shield yourself and your loved ones from preventable diseases with our trusted vaccinations, providing a strong defense against illness and promoting a healthier future",
-    },
-  ]
-
-  return (
-    <section ref={ref} className="py-16 px-8 md:px-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left: Image */}
-          <div
-            className={`transition-all duration-1000 transform ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-            }`}
-          >
+        {/* Card 2: Highest Quality Care */}
+        <div className={`flex flex-col bg-[#E8F4FF] p-8 rounded-3xl transition-all delay-200 duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-3xl font-bold text-blue-900 mb-2">Highest Quality Care</h2>
+          <p className="text-blue-800/70 mb-6 font-medium">Our expert team works tirelessly to provide the best service.</p>
+          <div className="relative flex-grow h-64 w-full overflow-hidden rounded-[2rem]">
             <Image
-              src="/2.jpg"
-              alt="Quality Care Services"
-              width={500}
-              height={400}
-              className="rounded-xl shadow-lg w-full"
+              src={about1}
+              alt="Care"
+              fill
+              className="object-cover object-top"
             />
           </div>
+        </div>
 
-          {/* Right: Content */}
-          <div
-            className={`transition-all duration-1000 transform ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-            }`}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-4 text-balance">
-              Delivering the highest quality care.
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Our team of expert pharmacists and staff works to provide the highest quality
-            </p>
-
-            <div className="space-y-6">
-              {services.map((service, idx) => (
-                <div key={idx} className="flex gap-4">
-                  <div className="flex-shrink-0 text-green-700 mt-1">{service.icon}</div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 mb-2">{service.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
-                  </div>
-                </div>
-              ))}
+        {/* Card 3: Services List */}
+        <div className="flex flex-col space-y-4">
+          {services.map((s, i) => (
+            <div key={i} className={`flex items-center gap-4 bg-white p-6 h-full rounded-2xl shadow-sm border border-blue-50 transition-all duration-700 delay-${i * 100} ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+              <div className="p-3 bg-[#D6EBFF] rounded-xl text-blue-700 shrink-0">{s.icon}</div>
+              <div>
+                <h4 className="font-bold text-gray-800 text-sm">{s.title}</h4>
+                <p className="text-xs text-gray-500">{s.desc}</p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -197,47 +123,27 @@ function QualityCareSection() {
 }
 
 // ============================================
-// BEST AMONG SECTION
+// WHY US SECTION
 // ============================================
-function BestAmongSection() {
+function WhyUsSection() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section ref={ref} className="py-16 px-8 md:px-16 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left: Content */}
-          <div
-            className={`transition-all duration-1000 transform order-2 md:order-1 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-            }`}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-6 text-balance">
-              We Are Best Among Others?
-            </h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              At LifeCare Pharmacy, our team of clinically trained pharmacists collaborates with you to deliver
-              personalized and convenient one-stop services that improve your quality of life.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              We fulfill both new and existing prescriptions in-store, over the phone, through e-prescriptions.
-              Moreover, we provide swift and confidential delivery and shipping services, completely free of charge.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              LifeCare Pharmacy also offers convenient packaging options to assist you in managing your medication while
-              on the move or at home.
-            </p>
-          </div>
+    <section ref={ref} className="py-16 bg-[#D6EBFF]/30 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className={`relative ${isVisible ? 'scale-100 opacity-100' : 'scale-90 opacity-0'} transition-all duration-1000`}>
+          <div className="absolute -top-4 -left-4 w-full h-full border-2 border-blue-200 rounded-2xl z-0" />
+          <Image src="/3.gif" alt="Best Among Others" width={600} height={400} className="relative z-10 rounded-2xl shadow-2xl border-4 border-white" />
+        </div>
 
-          {/* Right: Images */}
-          <div
-            className={`transition-all duration-1000 transform order-1 md:order-2 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-            }`}
-          >
-            <div className="relative h-96">
-              <Image src="/3.gif" alt="Best Among Others" fill className="object-cover rounded-xl shadow-lg" />
-            </div>
+        <div className={`${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} transition-all duration-1000`}>
+          <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">Best Choice</span>
+          <h2 className="text-4xl md:text-5xl font-black text-blue-900 mt-2 mb-6">Why Are We The Preferred Choice?</h2>
+          <div className="space-y-6 text-gray-700 leading-relaxed">
+            <p>Our team of clinically trained professionals collaborates with you to deliver personalized and convenient one-stop services that improve your quality of life.</p>
+            <p className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+              We fulfill prescriptions in-store, via phone, or e-prescriptions with free swift, confidential delivery.
+            </p>
           </div>
         </div>
       </div>
@@ -252,46 +158,40 @@ function PharmacistSection() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section ref={ref} className="py-16 px-8 md:px-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left: Image */}
-          <div
-            className={`transition-all duration-1000 transform ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-            }`}
-          >
-            <div className="relative h-96 md:h-full min-h-96">
-              <Image
-                src={service1}
-                alt="Lead Pharmacist"
-                src="/r.png"
-                alt="Uzair Chachar - Lead Pharmacist"
-                fill
-                className="object-cover rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
+    <section ref={ref} className="py-20 px-6 bg-[#D6EBFF]/20 relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white rounded-full opacity-40 blur-3xl -z-10" />
 
-          {/* Right: Content */}
-          <div
-            className={`transition-all duration-1000 transform ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-            }`}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-2">Meet our Pharmacist</h2>
-            <h3 className="text-2xl font-bold text-green-800 mb-1">Uzair Chachar</h3>
-            <p className="text-lg font-semibold text-gray-700 mb-6">Retail Pharmacist/Manager</p>
-            <p className="text-gray-600 leading-relaxed">
-              As the Pharmacist in Charge, I bring over a decade of dedicated experience to LifeCare Pharmacy. With a
-              commitment to putting patients first, I go above and beyond to ensure everyone receives the highest level
-              of care.
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+        <div className={`md:w-5/12 relative ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'} transition-all duration-1000`}>
+          <div className="relative z-10 w-full aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl">
+            <Image src="/r.png" alt="Pharmacy Professional Care" fill className="object-cover object-top" />
+          </div>
+          <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-500 rounded-2xl -z-10 flex items-center justify-center">
+            <Microscope className="text-white w-12 h-12" />
+          </div>
+        </div>
+
+        <div className={`md:w-7/12 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} transition-all duration-1000`}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-100 text-blue-700 text-xs font-bold mb-6">
+            <ShieldCheck className="w-4 h-4" /> QUALITY ASSURED
+          </div>
+          <h2 className="text-5xl font-black text-blue-950 mb-2">Clinical <span className="text-blue-600">Excellence</span></h2>
+          <p className="text-xl font-semibold text-blue-800/80 mb-8 italic">Expert Pharmaceutical Management</p>
+          <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+            <p className="relative pl-6 border-l-2 border-blue-300">
+              "We believe healthcare should be accessible, transparent, and personalized."
             </p>
-            <p className="text-gray-600 leading-relaxed mt-4">
-              I hold a PharmD degree from Long Island University, reflecting my dedication to staying at the forefront
-              of pharmaceutical knowledge. Your well-being is my priority, and I am here to provide expert guidance and
-              support for all your healthcare needs.
-            </p>
+            <p>Our clinical approach integrates modern pharmaceutical science with compassionate care.</p>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-xl shadow-sm border border-blue-50">
+              <Award className="text-blue-500 w-5 h-5" />
+              <span className="text-sm font-bold text-gray-800">Certified Standards</span>
+            </div>
+            <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-xl shadow-sm border border-blue-50">
+              <Search className="text-blue-500 w-5 h-5" />
+              <span className="text-sm font-bold text-gray-800">Precision Verified</span>
+            </div>
           </div>
         </div>
       </div>
@@ -304,18 +204,18 @@ function PharmacistSection() {
 // ============================================
 export default function AboutPage() {
   return (
-    <main className="relative w-full overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-50/90 via-green-50/80 to-green-50/70" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 to-emerald-200/40" />
-
-      {/* Page Content */}
-      <div className="relative z-10">
-        <HeroSection />
-        <StatsSection />
-        <QualityCareSection />
-        <BestAmongSection />
+    <main className="relative w-full bg-white overflow-hidden">
+      <HeroSection />
+      {/* Removed space-y-12 to tighten the layout */}
+      <div className="flex flex-col">
+        <InfoGridSection />
+        <WhyUsSection />
         <PharmacistSection />
+      </div>
+
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-40">
+        <div className="absolute top-[20%] -right-20 w-96 h-96 bg-[#D6EBFF] rounded-full blur-[120px]" />
+        <div className="absolute bottom-[10%] -left-20 w-96 h-96 bg-blue-100 rounded-full blur-[120px]" />
       </div>
     </main>
   )

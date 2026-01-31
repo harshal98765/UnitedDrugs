@@ -126,7 +126,7 @@ export default function MedicationAvailabilitySearch() {
 
         {/* HEADER */}
         <div className="text-center mb-12">
-          <h2 className="serif-heading text-4xl md:text-5xl font-bold text-[#0B2C4D] mb-4">
+          <h2 className=" text-4xl md:text-5xl font-bold text-[#0B2C4D] mb-4">
             Find Your Medication
           </h2>
           <p className="text-base md:text-lg text-slate-600">
@@ -176,7 +176,7 @@ export default function MedicationAvailabilitySearch() {
         {!submitted && !selectedMedication && (
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-2xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-[#1E5FA8] mb-3 text-3xl">✓</div>
+              {/* <div className="text-[#1E5FA8] mb-3 text-3xl">✓</div> */}
               <h3 className="text-lg font-bold text-[#0B2C4D] mb-2">
                 Quick Search
               </h3>
@@ -186,7 +186,7 @@ export default function MedicationAvailabilitySearch() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-[#1E5FA8] mb-3 text-3xl">📞</div>
+              {/* <div className="text-[#1E5FA8] mb-3 text-3xl">📞</div> */}
               <h3 className="text-lg font-bold text-[#0B2C4D] mb-2">
                 Easy Confirmation
               </h3>
@@ -196,7 +196,7 @@ export default function MedicationAvailabilitySearch() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-[#1E5FA8] mb-3 text-3xl">⏱️</div>
+              {/* <div className="text-[#1E5FA8] mb-3 text-3xl">⏱️</div> */}
               <h3 className="text-lg font-bold text-[#0B2C4D] mb-2">
                 Quick Response
               </h3>

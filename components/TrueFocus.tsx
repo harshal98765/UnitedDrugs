@@ -84,7 +84,7 @@ const TrueFocus = ({
         return (
           <span
             key={index}
-            ref={(el) => (wordRefs.current[index] = el)}
+            ref={(el) => {(wordRefs.current[index] = el)}}
             className="relative font-black cursor-pointer"
             style={{
               filter: isActive ? "blur(0px)" : `blur(${blurAmount}px)`,

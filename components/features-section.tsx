@@ -38,7 +38,7 @@ export default function FeaturesSection() {
 
         {/* HEADER */}
         <div className="text-center mb-16 animate-slideInUp">
-          <h2 className="hero-title serif-heading leading-tight mb-4">
+          <h2 className="hero-title  leading-tight mb-4">
             <span className="text-foreground">Why </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
               Choose Us

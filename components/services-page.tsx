@@ -46,7 +46,7 @@ export default function WhatWeOfferSection() {
 
         {/* HEADER */}
         <div className="text-center mb-12">
-          <h2 className="hero-title serif-heading text-foreground leading-tight">
+          <h2 className="hero-title  text-foreground leading-tight">
             What We{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
               Offer

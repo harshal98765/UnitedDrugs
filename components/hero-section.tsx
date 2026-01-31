@@ -93,7 +93,7 @@ export default function HeroSection() {
           <div className="order-1 lg:order-2 animate-slideInRight">
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-8 md:p-10 border border-blue-100/50 hover:shadow-3xl transition-shadow duration-500">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold serif-heading text-foreground mb-3">
+                <h2 className="text-3xl font-bold  text-foreground mb-3">
                   Submit Your RX
                 </h2>
                 <div className="w-12 h-1 bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8] rounded-full" />
@@ -104,7 +104,7 @@ export default function HeroSection() {
                   <div className="inline-block p-3 bg-secondary/10 rounded-full">
                     <CheckCircle className="w-12 h-12 text-secondary" />
                   </div>
-                  <h3 className="text-2xl font-bold serif-heading text-foreground">
+                  <h3 className="text-2xl font-bold  text-foreground">
                     Success!
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -177,7 +177,7 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <h1 className="hero-title serif-heading text-foreground leading-tight">
+            <h1 className="hero-title  text-foreground leading-tight">
               Your Wellness,
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">

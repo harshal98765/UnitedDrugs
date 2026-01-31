@@ -15,7 +15,7 @@ export default function TransferPrescriptionBanner() {
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-center gap-4 md:gap-10">
 
           {/* Animated Text */}
-          <div className="serif-heading text-3xl md:text-4xl lg:text-5xl leading-tight text-center md:text-left">
+          <div className=" text-3xl md:text-4xl lg:text-5xl leading-tight text-center md:text-left">
             <TrueFocus
               sentence="Transfer a Prescription"
               manualMode={false}

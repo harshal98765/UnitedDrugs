@@ -89,7 +89,7 @@ export default function ContactForm() {
           {/* ================= CONTACT INFO ================= */}
           <div className="animate-slideInUp">
 
-            <h2 className="hero-title serif-heading text-foreground leading-tight mb-8">
+            <h2 className="hero-title  text-foreground leading-tight mb-8">
               Get In{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
                 Touch

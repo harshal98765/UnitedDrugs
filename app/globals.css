@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -79,9 +80,12 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
+
+  --font-sans: "Poppins", "Geist", "Geist Fallback", system-ui, sans-serif;
   --font-serif: "Playfair Display", serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
+
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -124,10 +128,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
+
 
 /* Custom animations */
 @keyframes slideInUp {
