@@ -14,7 +14,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "Life Care Pharmacy | Trusted Pharmacy in Jersey City, NJ",
+    default: "Bergen Road Pharmacy",
     template: "%s | Life Care Pharmacy",
   },
 
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "logo.ico" },
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.png", sizes: "16x16", type: "image/png" },
     ],
     apple: "/apple-touch-icon.png",
   },
