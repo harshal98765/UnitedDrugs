@@ -153,7 +153,7 @@ export default function FaqSection() {
 
         {/* HEADER */}
         <div className="text-center mb-16 space-y-4">
-          <h2 className="hero-title serif-heading leading-tight">
+          <h2 className="hero-title  leading-tight">
             Frequently Asked{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
               Questions

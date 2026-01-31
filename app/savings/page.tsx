@@ -109,7 +109,7 @@ const inputStyle =
 
         {/* ================= HEADER ================= */}
         <div className="text-center mb-12">
-          <h2 className="serif-heading text-4xl md:text-5xl font-bold text-[#0B2C4D] mb-4">
+          <h2 className=" text-4xl md:text-5xl font-bold text-[#0B2C4D] mb-4">
             Savings & Copay Help
           </h2>
           <p className="text-lg text-slate-700 max-w-2xl mx-auto">
@@ -124,7 +124,7 @@ const inputStyle =
               <CheckCircle className="w-16 h-16 text-[#1E5FA8]" />
             </div>
 
-            <h3 className="serif-heading text-3xl font-bold text-[#0B2C4D]">
+            <h3 className=" text-3xl font-bold text-[#0B2C4D]">
               Request Received
             </h3>
 
@@ -146,7 +146,7 @@ const inputStyle =
 
           {/* ===== PATIENT INFO ===== */}
           <div>
-            <h3 className="serif-heading text-2xl font-bold text-[#0B2C4D] mb-4">
+            <h3 className=" text-2xl font-bold text-[#0B2C4D] mb-4">
               Patient Information
             </h3>
 
@@ -205,7 +205,7 @@ const inputStyle =
 
           {/* ===== MEDICATION INFO ===== */}
           <div>
-            <h3 className="serif-heading text-2xl font-bold text-[#0B2C4D] mb-4">
+            <h3 className=" text-2xl font-bold text-[#0B2C4D] mb-4">
               Medication Details
             </h3>
 
@@ -228,7 +228,7 @@ const inputStyle =
 
           {/* ===== INSURANCE STATUS ===== */}
           <div>
-            <h3 className="serif-heading text-2xl font-bold text-[#0B2C4D] mb-4">
+            <h3 className=" text-2xl font-bold text-[#0B2C4D] mb-4">
               Insurance Status
             </h3>
 
@@ -247,7 +247,7 @@ const inputStyle =
 
           {/* ===== COST QUESTION ===== */}
           <div>
-            <h3 className="serif-heading text-2xl font-bold text-[#0B2C4D] mb-4">
+            <h3 className=" text-2xl font-bold text-[#0B2C4D] mb-4">
               Cost Experience
             </h3>
 
@@ -283,7 +283,7 @@ const inputStyle =
 
           {/* ===== OPTIONAL INFO ===== */}
           <div>
-            <h3 className="serif-heading text-2xl font-bold text-[#0B2C4D] mb-4">
+            <h3 className=" text-2xl font-bold text-[#0B2C4D] mb-4">
               Optional Information
             </h3>
 
