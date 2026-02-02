@@ -4,6 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X, Phone } from "lucide-react"
 import Image from "next/image"
+import { useRouter, usePathname } from 'next/navigation'
+
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -16,34 +18,43 @@ const navItems = [
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [showAlert, setShowAlert] = useState(true)
+  const router = useRouter()
+const pathname = usePathname()
+
 
   return (
+    
     <>
+    
       {/* ================= TOP ALERT ================= */}
       {/* ================= TOP ALERT ================= */}
 {showAlert && (
   <div
-    className="
-      fixed top-0 w-full z-41
-      bg-gradient-to-r
-      from-[#D6EBFF]
-      via-[#F0F7FF]
-      to-[#D6EBFF]
-      text-[#0B2C4D]
-    "
-  >
+  className="
+    fixed top-0 w-full z-41
+    bg-gradient-to-r
+    from-[#D6EBFF]
+    via-[#F0F7FF]
+    to-[#D6EBFF]
+    text-[#0B2C4D]
+    pointer-events-none
+  "
+>
+
     <div className="max-w-7xl mx-auto px-3 py-2 flex items-center justify-center relative">
 
       <p
-    className="
-      inline-block
-      whitespace-nowrap
-      text-[13px]
-      md:text-base
-      font-semibold
-      animate-slide-left
-    "
-  >
+  className="
+    pointer-events-auto
+    inline-block
+    whitespace-nowrap
+    text-[13px]
+    md:text-base
+    font-semibold
+    animate-slide-left
+  "
+>
+
         Horizon NJ Health members welcome •{" "}
         <a
           href="tel:+12014348062"
@@ -55,17 +66,18 @@ export default function Navigation() {
 
       {/* ❌ CLOSE BUTTON — DESKTOP ONLY */}
       <button
-        onClick={() => setShowAlert(false)}
-        className="
-          hidden md:flex
-          absolute right-4
-          hover:bg-black/10
-          rounded-md
-          p-1
-          transition
-        "
-        aria-label="Close alert"
-      >
+  onClick={() => setShowAlert(false)}
+  className="
+    pointer-events-auto
+    hidden md:flex
+    absolute right-4
+    hover:bg-black/10
+    rounded-md
+    p-1
+    transition
+  "
+>
+
         <X size={20} />
       </button>
 
@@ -94,24 +106,34 @@ export default function Navigation() {
 
             {/* Logo */}
             {/* Logo */}
-<div className="flex items-center h-20">
-  <Link href="/" aria-label="Go to homepage">
-    <Image
-      src="/logo.png"
-      alt="Life Care Pharmacy – Jersey City NJ"
-      width={220}
-      height={60}
-      priority
-      className="
-        object-contain
-        max-h-[370px]
-        cursor-pointer
-        -translate-y-1
-        -translate-x-12
-      "
-    />
-  </Link>
+<div
+  className="flex items-center h-20 cursor-pointer"
+  aria-label="Go to homepage"
+  onClick={() => {
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      router.push('/')
+    }
+  }}
+>
+  <Image
+    src="/logo.png"
+    alt="Life Care Pharmacy – Jersey City NJ"
+    width={220}
+    height={60}
+    priority
+    className="
+      object-contain
+      max-h-[370px]
+      cursor-pointer
+      -translate-y-1
+      -translate-x-12
+    "
+  />
 </div>
+
+
 
 
 

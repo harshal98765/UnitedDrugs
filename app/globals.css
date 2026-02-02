@@ -296,7 +296,7 @@ input[type="date"]:not([value=""]) + span {
    ALERT SLIDING ANIMATION
    =============================== */
 
-@keyframes slide-left {
+/* @keyframes slide-left {
   0% {
     transform: translateX(100%);
   }
@@ -307,4 +307,4 @@ input[type="date"]:not([value=""]) + span {
 
 .animate-slide-left {
   animation: slide-left 15s linear infinite;
-}
+} */
