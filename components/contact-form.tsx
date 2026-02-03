@@ -120,7 +120,7 @@ export default function ContactForm() {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Email</h3>
                   <p className="text-muted-foreground">
-                    Bergenroadpharmacyllc@gmail.com
+                    Bergenroadpharmacy@gmail.com
                   </p>
                   <p className="text-sm text-muted-foreground">
                     Response within 2 hours

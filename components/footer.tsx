@@ -240,10 +240,10 @@ export default function Footer() {
                   <p>
                     Email:{" "}
                     <a
-                      href="mailto:Bergenroadpharmacyllc@gmail.com"
+                      href="mailto:Bergenroadpharmacy@gmail.com"
                       className="text-blue-600 underline"
                     >
-                      Bergenroadpharmacyllc@gmail.com
+                      Bergenroadpharmacy@gmail.com
                     </a>
                   </p>
                 </>

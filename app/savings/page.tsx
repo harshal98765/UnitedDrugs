@@ -385,7 +385,7 @@ const inputStyle =
   <br />
   Phone: +1 201-434-8062
   <br />
-  Email: bergenroadpharmacyllc@gmail.com
+  Email: Bergenroadpharmacy@gmail.com
 </p>
 
 
