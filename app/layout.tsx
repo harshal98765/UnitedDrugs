@@ -21,22 +21,25 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bergen Road Pharmacy | Jersey City, NJ",
+    default: "Bergen Road Pharmacy – Local Pharmacy in Jersey City, NJ",
     template: "%s | Bergen Road Pharmacy",
   },
 
   description:
-    "Bergen Road Pharmacy in Jersey City, NJ offering free prescription delivery, vaccinations, medication synchronization, and insurance assistance.",
+    "Looking for a pharmacy near Bergen Road in Jersey City, NJ? Bergen Road Pharmacy offers free prescription delivery, vaccinations, refills, and personalized care.",
 
   applicationName: "Bergen Road Pharmacy",
 
-  metadataBase: new URL("https://bergenroadpharmacy.com"),
+  alternates: {
+  canonical: "https://bergenroad.com",
+},
+
 
   openGraph: {
     title: "Bergen Road Pharmacy | Jersey City, NJ",
     description:
       "Your neighborhood pharmacy in Jersey City. Free delivery, immunizations, and personalized care.",
-   url: "https://bergenroadpharmacy.com",
+   url: "https://bergenroad.com",
     siteName: "Bergen Road Pharmacy",
     type: "website",
     images: [
@@ -59,10 +62,10 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: "logo.ico" },
-      { url: "/logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/logo.png", sizes: "16x16", type: "image/png" },
-    ],
+  { url: "/favicon.ico" },
+  { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+  { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+],
     apple: "/apple-touch-icon.png",
   },
 
@@ -103,13 +106,13 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Pharmacy",
               name: "Bergen Road Pharmacy",
-              url: "https://bergenroadpharmacy.com",
-              logo: "https://bergenroadpharmacy.com/logo.png",
-              image: "https://bergenroadpharmacy.com/og-image.png",
+              url: "https://bergenroad.com",
+              logo: "https://bergenroad.com/logo.png",
+              image: "https://bergenroad.com/og-image.png",
               description:
                 "Bergen Road Pharmacy in Jersey City offering prescription services, vaccinations, free delivery and insurance assistance.",
               telephone: "+1-201-434-8062",
-              email: "Bergenroadpharmacyllc@gmail.com",
+              email: "Bergenroadpharmacy@gmail.com",
               priceRange: "$$",
 
               address: {
@@ -149,8 +152,8 @@ export default function RootLayout({
               ],
 
               sameAs: [
-                "https://www.facebook.com/bergenroadpharmacy",
-                "https://www.instagram.com/bergenroadpharmacy",
+                "https://www.facebook.com/bergenroad",
+                "https://www.instagram.com/bergenroad",
               ],
             }),
           }}
