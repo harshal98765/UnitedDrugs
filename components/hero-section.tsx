@@ -1,55 +1,67 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { CheckCircle, Lock, Zap, Heart, ShieldCheck, ClipboardList } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import {
+  CheckCircle,
+  Lock,
+  Zap,
+  Heart,
+  ShieldCheck,
+  ClipboardList,
+} from "lucide-react";
 
 export default function HeroSection() {
-  const [rxNumber, setRxNumber] = useState("")
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [rxNumber, setRxNumber] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-    setSubmitted(false)
+    e.preventDefault();
+    setError("");
+    setSubmitted(false);
 
     const rxList = rxNumber
       .split(/[\s,]+/)
       .map((rx) => rx.trim())
-      .filter(Boolean)
+      .filter(Boolean);
 
     if (rxList.length === 0) {
-      setError("Please enter at least one RX number")
-      return
+      setError("Please enter at least one RX number");
+      return;
     }
 
     try {
-      setLoading(true)
+      setLoading(true);
 
-      const response = await fetch("https://bergenroad-backend.onrender.com/api/mail/rx", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rxNumbers: rxList }),
-      })
+      const response = await fetch(
+        "https://rxflow-backend-1-ky18.onrender.com/api/mail/rx",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rxNumbers: rxList }),
+        },
+      );
 
-      const data = await response.json()
-      if (!response.ok) throw new Error(data?.message || "Server error. Please try again.")
+      const data = await response.json();
+      if (!response.ok)
+        throw new Error(data?.message || "Server error. Please try again.");
 
-      setSubmitted(true)
-      setRxNumber("")
-      setTimeout(() => setSubmitted(false), 5000)
+      setSubmitted(true);
+      setRxNumber("");
+      setTimeout(() => setSubmitted(false), 5000);
     } catch (err: any) {
-      setError(err?.message || "Failed to submit RX numbers. Please try again.")
+      setError(
+        err?.message || "Failed to submit RX numbers. Please try again.",
+      );
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fbff] via-white to-[#eef6ff] overflow-hidden px-4 py-16">
-
       {/* Decorative grid */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -67,7 +79,6 @@ export default function HeroSection() {
       <div className="absolute -bottom-40 -left-40 w-[420px] h-[420px] bg-cyan-200 rounded-full blur-[140px] opacity-30" />
 
       <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
         {/* LEFT CONTENT */}
         <div className="space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mx-auto lg:mx-0">
@@ -84,35 +95,52 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-base md:text-lg text-slate-700 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            Submit your prescription number online. Our licensed pharmacists in Jersey City
-            will process your refill securely and accurately.
+            Submit your prescription number online. Our licensed pharmacists in
+            Jersey City will process your refill securely and accurately.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
             {[
-              { icon: Lock, title: "Secure & Private", desc: "HIPAA compliant handling" },
-              { icon: ClipboardList, title: "Pharmacist Reviewed", desc: "Licensed verification" },
-              { icon: Zap, title: "Fast Processing", desc: "Same-day when available" },
-              { icon: Heart, title: "Patient-Centered", desc: "Local pharmacy care" },
+              {
+                icon: Lock,
+                title: "Secure & Private",
+                desc: "HIPAA compliant handling",
+              },
+              {
+                icon: ClipboardList,
+                title: "Pharmacist Reviewed",
+                desc: "Licensed verification",
+              },
+              {
+                icon: Zap,
+                title: "Fast Processing",
+                desc: "Same-day when available",
+              },
+              {
+                icon: Heart,
+                title: "Patient-Centered",
+                desc: "Local pharmacy care",
+              },
             ].map((item, i) => {
-              const Icon = item.icon
+              const Icon = item.icon;
               return (
                 <div
                   key={i}
                   className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm text-left"
                 >
                   <Icon className="text-blue-700 mb-2" />
-                  <p className="font-semibold text-slate-900 text-sm">{item.title}</p>
+                  <p className="font-semibold text-slate-900 text-sm">
+                    {item.title}
+                  </p>
                   <p className="text-xs text-slate-600">{item.desc}</p>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
 
         {/* RIGHT FORM */}
         <div className="bg-white rounded-3xl p-6 md:p-10 border border-slate-200 shadow-xl w-full max-w-lg mx-auto">
-
           <div className="mb-6 text-center lg:text-left">
             <h2 className="text-xl md:text-2xl font-bold text-slate-900">
               Submit Your Prescription
@@ -144,14 +172,16 @@ export default function HeroSection() {
                 type="text"
                 value={rxNumber}
                 onChange={(e) => {
-                  setRxNumber(e.target.value)
-                  setError("")
+                  setRxNumber(e.target.value);
+                  setError("");
                 }}
                 placeholder="Enter RX numbers separated by commas"
                 className="w-full border border-slate-300 rounded-xl px-4 py-3 text-center font-semibold tracking-wide focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
 
-              {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+              {error && (
+                <p className="text-red-600 text-sm text-center">{error}</p>
+              )}
 
               <button
                 type="submit"
@@ -162,12 +192,13 @@ export default function HeroSection() {
               </button>
 
               <p className="text-[11px] text-slate-500 text-center">
-                Your information is transmitted securely and handled in compliance with HIPAA.
+                Your information is transmitted securely and handled in
+                compliance with HIPAA.
               </p>
             </form>
           )}
         </div>
       </div>
     </section>
-  )
+  );
 }

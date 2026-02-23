@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Mail, Phone, MapPin, HelpCircle, Send } from "lucide-react"
-import Link from "next/link"
+import type React from "react";
+import { useState } from "react";
+import { Mail, Phone, MapPin, HelpCircle, Send } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,24 +12,24 @@ export default function ContactForm() {
     email: "",
     phone: "",
     message: "",
-  })
+  });
 
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    setError("")
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setError("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-    setSubmitted(false)
+    e.preventDefault();
+    setError("");
+    setSubmitted(false);
 
     if (
       !formData.firstName ||
@@ -38,41 +38,42 @@ export default function ContactForm() {
       !formData.phone ||
       !formData.message
     ) {
-      setError("All fields are required")
-      return
+      setError("All fields are required");
+      return;
     }
 
     try {
-      setLoading(true)
+      setLoading(true);
 
       const response = await fetch(
-        "https://bergenroad-backend.onrender.com/api/mail/contact",
+        "https://rxflow-backend-1-ky18.onrender.com/api/mail/contact",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-        }
-      )
+        },
+      );
 
-      const data = await response.json()
-      if (!response.ok) throw new Error(data?.message || "Failed to send message.")
+      const data = await response.json();
+      if (!response.ok)
+        throw new Error(data?.message || "Failed to send message.");
 
-      setSubmitted(true)
+      setSubmitted(true);
       setFormData({
         firstName: "",
         lastName: "",
         email: "",
         phone: "",
         message: "",
-      })
+      });
 
-      setTimeout(() => setSubmitted(false), 5000)
+      setTimeout(() => setSubmitted(false), 5000);
     } catch (err: any) {
-      setError(err?.message || "Something went wrong.")
+      setError(err?.message || "Something went wrong.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <section
@@ -84,23 +85,21 @@ export default function ContactForm() {
       <div className="absolute -bottom-24 -right-24 w-[420px] h-[420px] bg-[#1E5FA8]/10 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* SECTION HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
             Contact <span className="text-blue-700">Our Pharmacy Team</span>
           </h2>
           <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-            Need assistance with prescriptions, refills, or delivery? Our support team is here to help.
+            Need assistance with prescriptions, refills, or delivery? Our
+            support team is here to help.
           </p>
         </div>
 
         {/* LAYOUT */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-
           {/* LEFT – SUPPORT HUB */}
           <div className="lg:col-span-5 space-y-6">
-
             <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
               <div className="flex items-center gap-4">
                 <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
@@ -109,7 +108,9 @@ export default function ContactForm() {
                 <div>
                   <p className="font-bold text-slate-900">Call Us</p>
                   <p className="text-sm text-slate-600">+19734829300</p>
-                  <p className="text-xs text-slate-500">Extended hours support</p>
+                  <p className="text-xs text-slate-500">
+                    Extended hours support
+                  </p>
                 </div>
               </div>
             </div>
@@ -122,7 +123,9 @@ export default function ContactForm() {
                 <div>
                   <p className="font-bold text-slate-900">Email Support</p>
                   <p className="text-sm text-slate-600">Udrugs507@gmail.com</p>
-                  <p className="text-xs text-slate-500">Replies within 2 hours</p>
+                  <p className="text-xs text-slate-500">
+                    Replies within 2 hours
+                  </p>
                 </div>
               </div>
             </div>
@@ -135,7 +138,9 @@ export default function ContactForm() {
                 <div>
                   <p className="font-bold text-slate-900">Visit Us</p>
                   <p className="text-sm text-slate-600">507 Central Ave</p>
-                  <p className="text-xs text-slate-500">Newark, NJ 07107, United States</p>
+                  <p className="text-xs text-slate-500">
+                    Newark, NJ 07107, United States
+                  </p>
                 </div>
               </div>
             </div>
@@ -151,7 +156,6 @@ export default function ContactForm() {
           {/* RIGHT – FORM PANEL */}
           <div className="lg:col-span-7">
             <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-10">
-
               {submitted ? (
                 <div className="text-center py-16">
                   <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6">
@@ -166,11 +170,8 @@ export default function ContactForm() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-
                   {error && (
-                    <p className="text-red-600 text-sm font-medium">
-                      {error}
-                    </p>
+                    <p className="text-red-600 text-sm font-medium">{error}</p>
                   )}
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -223,12 +224,10 @@ export default function ContactForm() {
                     {loading ? "Sending..." : "Send Message"}
                     <Send className="w-5 h-5" />
                   </button>
-
                 </form>
               )}
             </div>
           </div>
-
         </div>
       </div>
 
@@ -249,5 +248,5 @@ export default function ContactForm() {
         }
       `}</style>
     </section>
-  )
+  );
 }
