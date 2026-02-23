@@ -22,13 +22,14 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 py-16">
 
             <div>
-              <div className="-mt-35 object-contain -ml-7">
+              <div className="-mb-4">
   <Image
     src="/logo.png"
     alt="DrugDropRx Logo"
     width={180}
     height={60}
-    className="-mb-35 object-contain"
+    priority
+    className="object-contain scale-165"  // 👈 zoom in (125%)
   />
 </div>
 
@@ -131,7 +132,7 @@ export default function Footer() {
           <div className="border-t border-white/20"></div>
 
           <div className="py-8 flex flex-col sm:flex-row justify-between items-center text-white/80 text-sm">
-  <p>© {currentYear} Bergen Road Pharmacy. All rights reserved.</p>
+  <p>© {currentYear} United Drugs. All rights reserved.</p>
 
   <p className="flex items-center gap-1 mt-4 sm:mt-0">
     Made with{" "}
@@ -233,17 +234,17 @@ export default function Footer() {
                   <p className="font-semibold text-gray-900">Bergen Road Pharmacy</p>
                   <p>
                     Phone:{" "}
-                    <a href="tel:+12014251187" className="text-blue-600 underline">
-                      +1 201-434-8062
+                    <a href="tel:+19734829300" className="text-blue-600 underline">
+                      +1 9734829300
                     </a>
                   </p>
                   <p>
                     Email:{" "}
                     <a
-                      href="mailto:Bergenroadpharmacy@gmail.com"
+                      href="mailto:Udrugs507@gmail.com"
                       className="text-blue-600 underline"
                     >
-                      Bergenroadpharmacy@gmail.com
+                      Udrugs507@gmail.com
                     </a>
                   </p>
                 </>

@@ -57,10 +57,10 @@ const pathname = usePathname()
 
         Horizon NJ Health members welcome •{" "}
         <a
-          href="tel:+12014348062"
+          href="tel:+19734829300"
           className="underline font-bold hover:text-blue-700"
         >
-          Call 201-434-8062
+          Call +19734829300
         </a>
       </p>
 
@@ -91,9 +91,9 @@ const pathname = usePathname()
         className={`fixed w-full
         ${showAlert ? "top-8" : "top-0"}
         bg-gradient-to-r
-        from-[#0B2C4D]
-        via-[#0E3A66]
-        to-[#0B2C4D]
+        from-[#ffffff]
+        via-[#2870b8]
+        to-[#175a9c]
         backdrop-blur-md
         text-white
         shadow-lg
@@ -118,19 +118,21 @@ const pathname = usePathname()
   }}
 >
   <Image
-    src="/logo.png"
-    alt="Life Care Pharmacy – Jersey City NJ"
-    width={220}
-    height={60}
-    priority
-    className="
-      object-contain
-      max-h-[370px]
-      cursor-pointer
-      -translate-y-1
-      -translate-x-12
-    "
-  />
+  src="/logo.png"
+  alt="Life Care Pharmacy – Jersey City NJ"
+  width={360}
+  height={180}
+  priority
+  className="
+    object-contain
+    h-[230px]
+    w-auto
+    cursor-pointer
+    translate-y-1
+    -translate-x-12
+  "
+/>
+
 </div>
 
 
@@ -151,7 +153,7 @@ const pathname = usePathname()
 
               {/* CTA */}
               <a
-                href="tel:+12014348062"
+                href="tel:++19734829300"
                 className="flex items-center gap-3 bg-white text-[#0B2C4D] px-5 py-2.5 rounded-lg shadow hover:bg-blue-100 transition-all"
               >
                 <span className="bg-[#0B2C4D]/10 p-2 rounded-md">
@@ -159,7 +161,7 @@ const pathname = usePathname()
                 </span>
                 <div className="leading-tight">
                   <p className="text-sm font-semibold">Free Consultation</p>
-                  <p className="text-xs opacity-90">+1 201-434-8062</p>
+                  <p className="text-xs opacity-90">+19734829300</p>
                 </div>
               </a>
             </div>

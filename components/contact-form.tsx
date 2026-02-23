@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Mail, Phone, MapPin, HelpCircle } from "lucide-react"
+import { Mail, Phone, MapPin, HelpCircle, Send } from "lucide-react"
 import Link from "next/link"
 
 export default function ContactForm() {
@@ -55,10 +55,7 @@ export default function ContactForm() {
       )
 
       const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data?.message || "Failed to send message.")
-      }
+      if (!response.ok) throw new Error(data?.message || "Failed to send message.")
 
       setSubmitted(true)
       setFormData({
@@ -78,124 +75,118 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="relative py-20 overflow-hidden">
-
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50 to-gray-100" />
+    <section
+      id="contact"
+      className="relative py-28 bg-gradient-to-b from-white via-[#F4F9FF] to-white overflow-hidden"
+    >
+      {/* Ambient glow */}
+      <div className="absolute -top-24 -left-24 w-[420px] h-[420px] bg-blue-100/40 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-[420px] h-[420px] bg-[#1E5FA8]/10 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-          {/* ================= CONTACT INFO ================= */}
-          <div className="animate-slideInUp">
+        {/* SECTION HEADER */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
+            Contact <span className="text-blue-700">Our Pharmacy Team</span>
+          </h2>
+          <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+            Need assistance with prescriptions, refills, or delivery? Our support team is here to help.
+          </p>
+        </div>
 
-            <h2 className="hero-title  text-foreground leading-tight mb-8">
-              Get In{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
-                Touch
-              </span>
-            </h2>
+        {/* LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-            <div className="space-y-8">
+          {/* LEFT – SUPPORT HUB */}
+          <div className="lg:col-span-5 space-y-6">
 
-              {/* PHONE */}
-              <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0B2C4D]/10 flex items-center justify-center">
-                  <Phone className="text-[#0B2C4D]" size={24} />
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-blue-700" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">Phone</h3>
-                  <p className="text-muted-foreground">+1 201-434-8062</p>
-                  <p className="text-sm text-muted-foreground">
-                    Available on extended hours
-                  </p>
+                  <p className="font-bold text-slate-900">Call Us</p>
+                  <p className="text-sm text-slate-600">+19734829300</p>
+                  <p className="text-xs text-slate-500">Extended hours support</p>
                 </div>
               </div>
-
-              {/* EMAIL */}
-              <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-lg bg-[#1E5FA8]/10 flex items-center justify-center">
-                  <Mail className="text-[#1E5FA8]" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Email</h3>
-                  <p className="text-muted-foreground">
-                    Bergenroadpharmacy@gmail.com
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Response within 2 hours
-                  </p>
-                </div>
-              </div>
-
-              {/* LOCATION */}
-              <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                  <MapPin className="text-blue-600" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Location
-                  </h3>
-                  <p className="text-muted-foreground">
-                    239 Old Bergen Rd, 
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Jersey City, NJ 07305, United States
-                  </p>
-                </div>
-              </div>
-
-              {/* FAQ BUTTON */}
-              <Link href="/faqs">
-                <button className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8] shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <HelpCircle className="w-5 h-5" />
-                  Visit Our FAQs
-                </button>
-              </Link>
-
             </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-blue-700" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900">Email Support</p>
+                  <p className="text-sm text-slate-600">Udrugs507@gmail.com</p>
+                  <p className="text-xs text-slate-500">Replies within 2 hours</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-blue-700" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900">Visit Us</p>
+                  <p className="text-sm text-slate-600">507 Central Ave</p>
+                  <p className="text-xs text-slate-500">Newark, NJ 07107, United States</p>
+                </div>
+              </div>
+            </div>
+
+            <Link href="/faqs">
+              <button className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-white bg-[#0B2C4D] hover:bg-[#143A66] hover:shadow-lg transition">
+                <HelpCircle className="w-5 h-5" />
+                Visit FAQs
+              </button>
+            </Link>
           </div>
 
-          {/* ================= CONTACT FORM ================= */}
-          <div className="animate-slideInUp" style={{ animationDelay: "0.2s" }}>
-            <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+          {/* RIGHT – FORM PANEL */}
+          <div className="lg:col-span-7">
+            <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-10">
 
               {submitted ? (
-                <div className="animate-fadeInScale text-center py-12">
-                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-[#1E5FA8]/20 mb-6">
-                    <Mail className="text-[#1E5FA8]" size={32} />
+                <div className="text-center py-16">
+                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6">
+                    <Mail className="text-blue-700" size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">
-                    Message Sent!
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Message Sent Successfully
                   </h3>
-                  <p className="text-muted-foreground">
-                    Thank you for reaching out. We'll get back to you soon.
+                  <p className="text-slate-600">
+                    Our pharmacy team will reach out shortly.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
 
                   {error && (
-                    <p className="text-destructive text-sm font-medium animate-slideInUp">
+                    <p className="text-red-600 text-sm font-medium">
                       {error}
                     </p>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <input
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
                       placeholder="First Name"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#0B2C4D] focus:ring-2 focus:ring-[#0B2C4D]/20 transition-all"
+                      className="input-base"
                     />
                     <input
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
                       placeholder="Last Name"
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#0B2C4D] focus:ring-2 focus:ring-[#0B2C4D]/20 transition-all"
+                      className="input-base"
                     />
                   </div>
 
@@ -204,7 +195,7 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email Address"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1E5FA8] focus:ring-2 focus:ring-[#1E5FA8]/20 transition-all"
+                    className="input-base"
                   />
 
                   <input
@@ -212,34 +203,51 @@ export default function ContactForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1E5FA8] focus:ring-2 focus:ring-[#1E5FA8]/20 transition-all"
+                    className="input-base"
                   />
 
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Your Message"
+                    placeholder="How can we help you?"
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#0B2C4D] focus:ring-2 focus:ring-[#0B2C4D]/20 transition-all resize-none"
+                    className="input-base resize-none"
                   />
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-[#0B2C4D] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#143A66] transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-60"
+                    className="w-full bg-[#0B2C4D] text-white font-bold py-4 rounded-xl hover:bg-[#143A66] hover:shadow-lg transition flex items-center justify-center gap-2"
                   >
                     {loading ? "Sending..." : "Send Message"}
+                    <Send className="w-5 h-5" />
                   </button>
 
                 </form>
               )}
-
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* Input base style */}
+      <style jsx>{`
+        .input-base {
+          width: 100%;
+          padding: 14px 16px;
+          border-radius: 10px;
+          border: 1px solid #e2e8f0;
+          outline: none;
+          font-size: 15px;
+          transition: all 0.2s ease;
+        }
+        .input-base:focus {
+          border-color: #1e5fa8;
+          box-shadow: 0 0 0 3px rgba(30, 95, 168, 0.15);
+        }
+      `}</style>
     </section>
   )
 }

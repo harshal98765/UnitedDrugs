@@ -345,7 +345,7 @@ const inputStyle =
       {/* HEADER */}
       <div className="flex justify-between items-center px-6 py-4 border-b">
         <h2 className="text-xl font-bold text-[#0B2C4D]">
-  Bergen Road Pharmacy – Website Terms & Conditions
+  United Drugs – Website Terms & Conditions
 </h2>
 
 
@@ -362,11 +362,11 @@ const inputStyle =
 
 
         <p className="text-slate-500">
-          Last updated: January 29, 2026
+          Last updated: Feb 23, 2026
         </p>
 
         <p>
-          By accessing or using this website (bergenroadpharmacy.com),
+          By accessing or using this website (uniteddrugsrx.com),
           you agree to the following Terms and Conditions. If you do not
           agree, please do not use this website or submit any forms.
         </p>
@@ -375,17 +375,17 @@ const inputStyle =
 <p>
   This website is operated by:
   <br />
-  <strong>Bergen Road Pharmacy LLC</strong>
+  <strong>United Drugs </strong>
   <br />
-  239 Old Bergen Rd
+  507 Central Ave
   <br />
-  Jersey City, NJ 07305
+  Newark, NJ 07107,
   <br />
   United States
   <br />
-  Phone: +1 201-434-8062
+  Phone: +1 9734829300
   <br />
-  Email: Bergenroadpharmacy@gmail.com
+  Email: Udrugs507@gmail.com
 </p>
 
 

@@ -1,7 +1,220 @@
+// 'use client'
+
+// import { useState } from 'react'
+// import { ArrowLeft, ArrowRight, Pill, ClipboardList, HeartPulse } from 'lucide-react'
+
+// export default function WhatWeOfferSection() {
+//   const offers = [
+//     {
+//       image: '/medicine01.png',
+//       title: 'Precision Compounding',
+//       description:
+//         'Custom-formulated medications crafted specifically for your health requirements and sensitivities',
+//       color: 'from-[#0B2C4D] to-[#143A66]',
+//       icon: Pill,
+//     },
+//     {
+//       image: '/checkup01.png',
+//       title: 'Generic Plan',
+//       description:
+//         'Cost-effective generic alternatives without compromising on quality or efficay for common conditions',
+//       color: 'from-[#1E5FA8] to-[#2F80ED]',
+//       icon: ClipboardList,
+//     },
+//     {
+//       image: '/vaccin01.png',
+//       title: 'Care Support',
+//       description:
+//         'Expert guidance for managing diabetes, hypertension, thyroid disorders, and other long-term conditions',
+//       color: 'from-[#3B82F6] to-[#0EA5E9]',
+//       icon: HeartPulse,
+//     },
+//   ]
+
+//   // ✅ SECOND CARD ACTIVE BY DEFAULT
+//   const [active, setActive] = useState(1)
+
+//   const prev = () =>
+//     setActive((prev) => (prev === 0 ? offers.length - 1 : prev - 1))
+
+//   const next = () =>
+//     setActive((prev) => (prev === offers.length - 1 ? 0 : prev + 1))
+
+//   return (
+//     <section className="py-16 bg-gray-50 overflow-hidden">
+//       <div className="max-w-6xl mx-auto px-4">
+
+//         {/* HEADER */}
+//         <div className="text-center mb-12">
+//           <h2 className="hero-title  text-foreground leading-tight">
+//             What We{' '}
+//             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
+//               Offer
+//             </span>
+//           </h2>
+
+//           <p className="text-muted-foreground mt-4 text-lg">
+//             Full-service pharmacy solutions built for your needs
+//           </p>
+//         </div>
+
+//         {/* ================= MOBILE SLIDER ================= */}
+//         <div className="block md:hidden relative">
+
+//           <div className="overflow-hidden">
+//             <div
+//               className="flex transition-transform duration-500 ease-in-out"
+//               style={{
+//                 transform: `translateX(-${active * 100}%)`,
+//               }}
+//             >
+//               {offers.map((offer, index) => {
+//                 const Icon = offer.icon
+//                 return (
+//                   <div
+//                     key={index}
+//                     className="min-w-full flex justify-center px-4"
+//                   >
+//                     <div className="w-full max-w-sm h-[420px] rounded-3xl overflow-hidden relative">
+
+//                       <div
+//                         className="absolute inset-0 bg-center bg-no-repeat opacity-20"
+//                         style={{
+//                           backgroundImage: `url(${offer.image})`,
+//                           backgroundSize: '70%',
+//                         }}
+//                       />
+
+//                       <div
+//                         className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-80`}
+//                       />
+
+//                       <div className="relative z-10 h-full p-8 flex flex-col justify-center text-center text-white">
+//                         <div className="mx-auto mb-6 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+//                           <Icon className="w-8 h-8" />
+//                         </div>
+
+//                         <h3 className="text-2xl font-semibold mb-4">
+//                           {offer.title}
+//                         </h3>
+
+//                         <p className="text-sm text-white/90 leading-relaxed">
+//                           {offer.description}
+//                         </p>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 )
+//               })}
+//             </div>
+//           </div>
+
+//           <button
+//             onClick={prev}
+//             className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 shadow-md hover:bg-blue-50 rounded-full p-2"
+//           >
+//             <ArrowLeft />
+//           </button>
+
+//           <button
+//             onClick={next}
+//             className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 shadow-md hover:bg-blue-50 rounded-full p-2"
+//           >
+//             <ArrowRight />
+//           </button>
+//         </div>
+
+//         {/* ================= DESKTOP CAROUSEL ================= */}
+//         <div className="hidden md:flex relative items-center justify-center">
+
+//           <button
+//             onClick={prev}
+//             className="absolute left-0 z-20 bg-white shadow-lg rounded-full p-3 hover:scale-110 transition"
+//           >
+//             <ArrowLeft />
+//           </button>
+
+//           <div className="flex gap-8 transition-transform duration-700">
+//             {offers.map((offer, index) => {
+//               const isActive = index === active
+//               const Icon = offer.icon
+
+//               return (
+//                 <div
+//                   key={index}
+//                   onClick={() => setActive(index)}
+//                   className={`
+//                     relative rounded-3xl overflow-hidden cursor-pointer
+//                     transition-all duration-700
+//                     ${isActive ? 'scale-110 opacity-100' : 'scale-90 opacity-50'}
+//                   `}
+//                   style={{
+//                     width: isActive ? 320 : 260,
+//                     height: isActive ? 420 : 360,
+//                   }}
+//                 >
+//                   <div
+//                     className="absolute inset-0 bg-center bg-no-repeat opacity-20"
+//                     style={{
+//                       backgroundImage: `url(${offer.image})`,
+//                       backgroundSize: '70%',
+//                     }}
+//                   />
+
+//                   <div
+//                     className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-70`}
+//                   />
+
+//                   <div className="relative z-10 h-full p-8 flex flex-col justify-center text-center text-white">
+//                     <div className="mx-auto mb-6 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+//                       <Icon className="w-8 h-8" />
+//                     </div>
+
+//                     <h3 className="text-2xl font-semibold mb-4">
+//                       {offer.title}
+//                     </h3>
+
+//                     {isActive && (
+//                       <p className="text-sm text-white/90 leading-relaxed">
+//                         {offer.description}
+//                       </p>
+//                     )}
+//                   </div>
+//                 </div>
+//               )
+//             })}
+//           </div>
+
+//           <button
+//             onClick={next}
+//             className="absolute right-0 z-20 bg-white shadow-lg rounded-full p-3 hover:scale-110 transition"
+//           >
+//             <ArrowRight />
+//           </button>
+//         </div>
+
+//         {/* DOTS */}
+//         <div className="flex justify-center mt-8 gap-2">
+//           {offers.map((_, i) => (
+//             <button
+//               key={i}
+//               onClick={() => setActive(i)}
+//               className={`h-2 rounded-full transition-all
+//                 ${i === active ? 'bg-[#0B2C4D] w-6' : 'bg-blue-300 w-2'}
+//               `}
+//             />
+//           ))}
+//         </div>
+
+//       </div>
+//     </section>
+//   )
+// }
+
 'use client'
 
 import { useState } from 'react'
-import { ArrowLeft, ArrowRight, Pill, ClipboardList, HeartPulse } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Pill, ClipboardList, HeartPulse, ShieldCheck } from 'lucide-react'
 
 export default function WhatWeOfferSection() {
   const offers = [
@@ -10,15 +223,13 @@ export default function WhatWeOfferSection() {
       title: 'Precision Compounding',
       description:
         'Custom-formulated medications crafted specifically for your health requirements and sensitivities',
-      color: 'from-[#0B2C4D] to-[#143A66]',
       icon: Pill,
     },
     {
       image: '/checkup01.png',
       title: 'Generic Plan',
       description:
-        'Cost-effective generic alternatives without compromising on quality or efficay for common conditions',
-      color: 'from-[#1E5FA8] to-[#2F80ED]',
+        'Cost-effective generic alternatives without compromising on quality or efficacy for common conditions',
       icon: ClipboardList,
     },
     {
@@ -26,35 +237,34 @@ export default function WhatWeOfferSection() {
       title: 'Care Support',
       description:
         'Expert guidance for managing diabetes, hypertension, thyroid disorders, and other long-term conditions',
-      color: 'from-[#3B82F6] to-[#0EA5E9]',
       icon: HeartPulse,
     },
   ]
 
-  // ✅ SECOND CARD ACTIVE BY DEFAULT
   const [active, setActive] = useState(1)
 
-  const prev = () =>
-    setActive((prev) => (prev === 0 ? offers.length - 1 : prev - 1))
-
-  const next = () =>
-    setActive((prev) => (prev === offers.length - 1 ? 0 : prev + 1))
+  const prev = () => setActive((p) => (p === 0 ? offers.length - 1 : p - 1))
+  const next = () => setActive((p) => (p === offers.length - 1 ? 0 : p + 1))
 
   return (
-    <section className="py-16 bg-gray-50 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-18  bg-gradient-to-b from-white via-[#f6f9fe] to-white">
+      <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}
-        <div className="text-center mb-12">
-          <h2 className="hero-title  text-foreground leading-tight">
-            What We{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
-              Offer
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-blue-50 border border-blue-100 mb-6">
+            <ShieldCheck className="w-6 h-6 text-blue-700" />
+            <span className="text-base font-semibold text-blue-800">
+              Comprehensive Pharmacy Services
             </span>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
+            What We <span className="text-blue-700">Offer</span>
           </h2>
 
-          <p className="text-muted-foreground mt-4 text-lg">
-            Full-service pharmacy solutions built for your needs
+          <p className="text-xl md:text-xl text-slate-600 mt-6 max-w-xl mx-auto leading-relaxed">
+            Professional pharmacy services designed to support your long-term health and wellbeing.
           </p>
         </div>
 
@@ -64,43 +274,29 @@ export default function WhatWeOfferSection() {
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-in-out"
-              style={{
-                transform: `translateX(-${active * 100}%)`,
-              }}
+              style={{ transform: `translateX(-${active * 100}%)` }}
             >
               {offers.map((offer, index) => {
                 const Icon = offer.icon
                 return (
-                  <div
-                    key={index}
-                    className="min-w-full flex justify-center px-4"
-                  >
-                    <div className="w-full max-w-sm h-[420px] rounded-3xl overflow-hidden relative">
+                  <div key={index} className="min-w-full px-4">
+                    <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl p-10 h-[460px] flex flex-col justify-between">
 
-                      <div
-                        className="absolute inset-0 bg-center bg-no-repeat opacity-20"
-                        style={{
-                          backgroundImage: `url(${offer.image})`,
-                          backgroundSize: '70%',
-                        }}
-                      />
+                      <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center">
+                        <Icon className="w-10 h-10 text-blue-700" />
+                      </div>
 
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-80`}
-                      />
-
-                      <div className="relative z-10 h-full p-8 flex flex-col justify-center text-center text-white">
-                        <div className="mx-auto mb-6 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-                          <Icon className="w-8 h-8" />
-                        </div>
-
-                        <h3 className="text-2xl font-semibold mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 mt-8">
                           {offer.title}
                         </h3>
-
-                        <p className="text-sm text-white/90 leading-relaxed">
+                        <p className="text-slate-700 mt-4 text-lg leading-relaxed">
                           {offer.description}
                         </p>
+                      </div>
+
+                      <div className="pt-6">
+                        <div className="h-1.5 w-16 rounded-full bg-blue-600" />
                       </div>
                     </div>
                   </div>
@@ -111,30 +307,30 @@ export default function WhatWeOfferSection() {
 
           <button
             onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 shadow-md hover:bg-blue-50 rounded-full p-2"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white border border-slate-200 shadow-lg rounded-full p-3 hover:bg-blue-50"
           >
-            <ArrowLeft />
+            <ArrowLeft className="w-6 h-6 text-blue-700" />
           </button>
 
           <button
             onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 shadow-md hover:bg-blue-50 rounded-full p-2"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white border border-slate-200 shadow-lg rounded-full p-3 hover:bg-blue-50"
           >
-            <ArrowRight />
+            <ArrowRight className="w-6 h-6 text-blue-700" />
           </button>
         </div>
 
-        {/* ================= DESKTOP CAROUSEL ================= */}
-        <div className="hidden md:flex relative items-center justify-center">
+        {/* ================= DESKTOP ================= */}
+        <div className="hidden md:flex relative items-center justify-center gap-12">
 
           <button
             onClick={prev}
-            className="absolute left-0 z-20 bg-white shadow-lg rounded-full p-3 hover:scale-110 transition"
+            className="absolute left-0 z-20 bg-white border border-slate-200 shadow-xl rounded-full p-4 hover:bg-blue-50 transition"
           >
-            <ArrowLeft />
+            <ArrowLeft className="w-7 h-7 text-blue-700" />
           </button>
 
-          <div className="flex gap-8 transition-transform duration-700">
+          <div className="flex gap-12 transition-all duration-700">
             {offers.map((offer, index) => {
               const isActive = index === active
               const Icon = offer.icon
@@ -144,41 +340,36 @@ export default function WhatWeOfferSection() {
                   key={index}
                   onClick={() => setActive(index)}
                   className={`
-                    relative rounded-3xl overflow-hidden cursor-pointer
-                    transition-all duration-700
-                    ${isActive ? 'scale-110 opacity-100' : 'scale-90 opacity-50'}
+                    bg-white border border-slate-200 rounded-[2.5rem] cursor-pointer
+                    shadow-xl transition-all duration-700
+                    ${isActive ? 'scale-105 opacity-100 ring-4 ring-blue-200' : 'scale-95 opacity-60'}
                   `}
                   style={{
-                    width: isActive ? 320 : 260,
-                    height: isActive ? 420 : 360,
+                    width: 360,
+                    height: isActive ? 440 : 380,
                   }}
                 >
-                  <div
-                    className="absolute inset-0 bg-center bg-no-repeat opacity-20"
-                    style={{
-                      backgroundImage: `url(${offer.image})`,
-                      backgroundSize: '70%',
-                    }}
-                  />
+                  <div className="h-full p-10 flex flex-col justify-between">
 
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${offer.color} opacity-70`}
-                  />
-
-                  <div className="relative z-10 h-full p-8 flex flex-col justify-center text-center text-white">
-                    <div className="mx-auto mb-6 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-                      <Icon className="w-8 h-8" />
+                    <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center">
+                      <Icon className="w-10 h-10 text-blue-700" />
                     </div>
 
-                    <h3 className="text-2xl font-semibold mb-4">
-                      {offer.title}
-                    </h3>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900 mt-8">
+                        {offer.title}
+                      </h3>
 
-                    {isActive && (
-                      <p className="text-sm text-white/90 leading-relaxed">
-                        {offer.description}
-                      </p>
-                    )}
+                      {isActive && (
+                        <p className="text-slate-700 mt-4 text-lg leading-relaxed">
+                          {offer.description}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="pt-6">
+                      <div className="h-1.5 w-16 rounded-full bg-blue-600" />
+                    </div>
                   </div>
                 </div>
               )
@@ -187,20 +378,20 @@ export default function WhatWeOfferSection() {
 
           <button
             onClick={next}
-            className="absolute right-0 z-20 bg-white shadow-lg rounded-full p-3 hover:scale-110 transition"
+            className="absolute right-0 z-20 bg-white border border-slate-200 shadow-xl rounded-full p-4 hover:bg-blue-50 transition"
           >
-            <ArrowRight />
+            <ArrowRight className="w-7 h-7 text-blue-700" />
           </button>
         </div>
 
         {/* DOTS */}
-        <div className="flex justify-center mt-8 gap-2">
+        <div className="flex justify-center mt-12 gap-3">
           {offers.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`h-2 rounded-full transition-all
-                ${i === active ? 'bg-[#0B2C4D] w-6' : 'bg-blue-300 w-2'}
+              className={`h-3 rounded-full transition-all
+                ${i === active ? 'bg-blue-700 w-10' : 'bg-blue-200 w-3'}
               `}
             />
           ))}

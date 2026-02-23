@@ -1,116 +1,127 @@
 "use client"
 
-import { MapPin, Navigation, Clock } from "lucide-react"
+import { MapPin, Navigation, Clock, ExternalLink } from "lucide-react"
 
 export default function MapsSection() {
   const handleExploreMap = () => {
-    window.open(
-      "https://share.google/YXMB8atgOIbrxlvtm",
-      "_blank"
-    )
+    window.open("https://maps.app.goo.gl/HgHquhUMQrDRWnRQ6?g_st=iwb", "_blank")
   }
 
   return (
     <section
       id="coverage"
-      className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-gray-100 overflow-hidden"
+      className="relative py-28 bg-gradient-to-b from-white via-[#F4F9FF] to-white overflow-hidden"
     >
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-0 w-80 h-80 bg-[#1E5FA8]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-0 w-96 h-96 bg-[#0B2C4D]/10 rounded-full blur-3xl" />
+      {/* Ambient background */}
+      <div className="absolute -top-24 -left-24 w-[420px] h-[420px] bg-blue-100/40 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-[420px] h-[420px] bg-[#1E5FA8]/10 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* LEFT CONTENT */}
-          <div className="animate-slideInLeft space-y-8">
-            <div className="inline-flex items-center gap-2 bg-[#0B2C4D]/10 px-4 py-2 rounded-full border border-[#0B2C4D]/20">
-              <MapPin className="w-4 h-4 text-[#0B2C4D]" />
-              <span className="text-sm font-semibold text-[#0B2C4D] uppercase tracking-wide">
-                Global Coverage
-              </span>
-            </div>
-
-            <h2 className="hero-title  text-foreground leading-tight">
-              Service Regions & <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B2C4D] to-[#1E5FA8]">
-                Partner Network
-              </span>
-            </h2>
-
-            <p className="text-xl text-muted-foreground leading-relaxed font-light max-w-md">
-              We serve communities throughout major cities, delivering your prescriptions securely wherever you need them.
-            </p>
-
-            <div className="space-y-4 pt-4">
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-2 bg-[#0B2C4D]/10 rounded-lg">
-                  <Navigation className="w-5 h-5 text-[#0B2C4D]" />
-                </div>
-                <p className="font-semibold text-foreground text-lg">
-                  Real-time location tracking for Rx delivery on call basis only
-                </p>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-2 bg-[#1E5FA8]/10 rounded-lg">
-                  <MapPin className="w-5 h-5 text-[#1E5FA8]" />
-                </div>
-                <p className="font-semibold text-foreground text-lg">
-                  New Jersey, New York
-                </p>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="mt-1 p-2 bg-blue-500/10 rounded-lg">
-                  <Clock className="w-5 h-5 text-blue-600" />
-                </div>
-                <p className="font-semibold text-foreground text-lg">
-                  Geo-fenced security protocols
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-6">
-              <button
-                onClick={handleExploreMap}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#0B2C4D] text-white font-bold rounded-xl hover:bg-[#143A66] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-lg"
-              >
-                <MapPin className="w-5 h-5" />
-                Explore Interactive Map
-              </button>
-            </div>
+        {/* SECTION HEADER */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-4">
+            <MapPin className="w-4 h-4 text-blue-700" />
+            <span className="text-sm font-semibold text-blue-800">
+              SERVICE COVERAGE
+            </span>
           </div>
 
-          {/* RIGHT MAP */}
-          <div className="animate-slideInRight flex justify-center">
-            <div className="relative w-full max-w-lg">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white bg-white">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
+            Our Service Regions &{" "}
+            <span className="text-blue-700">Partner Network</span>
+          </h2>
 
-                {/* ✅ UPDATED MAP DISPLAY */}
-                {/* ✅ UPDATED MAP DISPLAY — NEW LOCATION */}
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.600911914276!2d-74.071672!3d40.726576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c250b7b0c6a6d9%3A0x5c8c5b2f5d6c9f4b!2sLife%20Care%20Pharmacy%20%26%20Compounding!5e0!3m2!1sen!2sus!4v1706692000000"
-  width="100%"
-  height="420"
-  style={{ border: 0 }}
-  allowFullScreen
-  loading="lazy"
-  referrerPolicy="no-referrer-when-downgrade"
-  className="rounded-2xl"
-/>
+          <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+            We deliver prescriptions across major cities with secure handling and geo-fenced logistics.
+          </p>
+        </div>
 
-{/* ✅ LOCATION DISPLAY EXACTLY LIKE IMAGE */}
-<div className="absolute bottom-6 left-6 bg-white rounded-xl px-6 py-4 shadow-lg border border-gray-200">
-  <p className="text-2xl font-bold serif-heading text-[#0B2C4D]">
-    Bergen Road Pharmacy
-  </p>
-  <p className="text-xs text-gray-500 font-medium">
-    Primary Pharmacy Location
-  </p>
-</div>
+        {/* CONTENT GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
 
+          {/* LEFT — INFO CARDS */}
+          <div className="lg:col-span-5 grid grid-cols-1 gap-6">
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                  <Navigation className="w-6 h-6 text-blue-700" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900">
+                    Real-Time Delivery Tracking
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Location updates available on call basis only.
+                  </p>
+                </div>
+              </div>
+            </div>
 
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-blue-700" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900">
+                    Regional Coverage
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Newark, NJ service area
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-xl transition">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-blue-700" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900">
+                    Geo-Fenced Security Protocols
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Secure handoff zones for patient safety
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleExploreMap}
+              className="mt-4 inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0B2C4D] text-white font-bold rounded-xl hover:bg-[#143A66] hover:shadow-lg transition"
+            >
+              Explore United Drugs on Maps
+              <ExternalLink className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* RIGHT — MAP PANEL */}
+          <div className="lg:col-span-7">
+            <div className="relative bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden h-full">
+
+              <iframe
+                src="https://www.google.com/maps?q=United+Drugs,+W+Market+St,+Newark,+NJ&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="min-h-[460px]"
+              />
+
+              {/* LOCATION TAG */}
+              <div className="absolute bottom-6 left-6 bg-white rounded-xl px-5 py-3 shadow-lg border border-slate-200">
+                <p className="text-base font-bold text-[#0B2C4D]">
+                  United Drugs
+                </p>
+                <p className="text-xs text-slate-500">
+                  Newark, New Jersey
+                </p>
               </div>
             </div>
           </div>
