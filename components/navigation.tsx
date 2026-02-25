@@ -164,7 +164,7 @@ export default function Navigation() {
             <div className="md:hidden relative overflow-hidden rounded-b-2xl animate-slideInUp">
               {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0B2C4D] via-[#0E3A66] to-[#0B2C4D]" /> */}
 
-              <div className="relative z-10 px-2 pb-6 pt-4 ">
+              <div className="relative z-10 px-2 pb-6 pt-4 bg-gradient-to-b from-[#007cc4] to-[#d6d7d8]">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
@@ -181,7 +181,7 @@ export default function Navigation() {
                   className="mt-4 flex items-center justify-center gap-2 text-gray-800 px-3 py-3 rounded-xl shadow hover:bg-blue-100"
                 >
                   <Phone size={18} />
-                  Free Consultation — +1 201-434-8062
+                  Free Consultation — +1 9734829300
                 </a>
               </div>
             </div>
