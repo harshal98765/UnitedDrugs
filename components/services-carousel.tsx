@@ -15,50 +15,65 @@ const services = [
 
 export default function RotatingCards() {
   return (
-    <div>
-      {/* <h1 className="translate-y-10">Servcies</h1> */}
-      <div className="void" id="void">
-        <div className="crop">
-          <ul id="card-list" style={{ ["--count" as any]: 6 }}>
-            {[...Array(6)].map((_, i) => (
-              <li key={i}>
-                <div className="card">
-                  <a href="#">
-                    <span className="model-name">Gretel-ACTGAN</span>
-                    <span>
-                      Model for generating highly dimensional, mostly numeric,
-                      tabular data
-                    </span>
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          <div className="last-circle"></div>
-          <div className="second-circle"></div>
-        </div>
-
-        <div className="mask">
-          <div className="services-grid">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <div key={index} className="service-item">
-                  <Icon className="service-icon" size={32} />
-                  <p className="service-title">{service.title}</p>
-                </div>
-              );
-            })}
+    <section className="max-w-7xl mx-auto px-4 py-12">
+      <div className="flex flex-col md:flex-row items-center gap-4">
+        {/* Left content */}
+        <div className="w-full md:w-1/3 text-center md:text-left">
+          <div className="inline-flex items-center gap-2 bg-neutral-900/10 px-4 py-2 rounded-full border border-neutral-900/10 mb-4">
+            <span className="text-sm font-semibold">WHY CHOOSE US</span>
           </div>
+
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            What We Provide
+          </h2>
+
+          <p className="text-base text-muted-foreground max-w-prose leading-relaxed">
+            Experience exceptional healthcare solutions designed to exceed your
+            expectations and ensure your wellness.
+          </p>
         </div>
-        <div className="center-circle flex justify-center items-center">
-          <div className="p-5 flex justify-center items-center">
-            <img
-              src={logo.src}
-              alt="Logo"
-              className="object-contain w-full h-full rounded-full"
-            />
+
+        {/* Right: rotating cards + center logo */}
+        <div className="w-full md:w-2/3">
+          <div className="void mx-auto" id="void">
+            <div className="crop">
+              <ul
+                id="card-list"
+                style={{ ["--count" as any]: services.length }}
+              >
+                {services.map((service, i) => {
+                  const Icon = service.icon;
+                  return (
+                    <li key={i} className="list">
+                      <div className="card">
+                        <a href="#" className="flex items-center gap-4">
+                          <Icon className="service-icon" size={28} />
+                          <div>
+                            <span className="model-name">{service.title}</span>
+                            <span className="block text-sm text-muted-foreground">
+                              {service.title} services and benefits
+                            </span>
+                          </div>
+                        </a>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <div className="last-circle"></div>
+              <div className="second-circle"></div>
+            </div>
+
+            <div className="center-circle flex justify-center items-center">
+              <div className="p-5 flex justify-center items-center w-full h-full">
+                <img
+                  src={logo.src}
+                  alt="Logo"
+                  className="object-contain w-full h-full rounded-full"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <style jsx global>{`
@@ -339,212 +354,47 @@ export default function RotatingCards() {
               rgba(60, 26, 229, 0) 100%
             );
           }
+
+          /* Responsive: stack on small screens and disable rotation for usability */
+          @media (max-width: 640px) {
+            .void {
+              width: 100%;
+              max-width: 100%;
+              aspect-ratio: auto;
+              padding: 0 8px;
+            }
+
+            ul {
+              position: static;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              aspect-ratio: auto;
+            }
+
+            li {
+              position: static;
+              transform: none;
+              animation: none;
+            }
+
+            .card {
+              width: 100%;
+              animation: none;
+            }
+
+            .crop {
+              -webkit-mask-image: none;
+            }
+
+            .center-circle {
+              position: relative;
+              width: 120px;
+              margin: 20px auto 0;
+            }
+          }
         `}</style>
       </div>
-    </div>
+    </section>
   );
 }
-
-// "use client"
-
-// import { useState, useEffect } from "react"
-// import {
-//   ChevronLeft,
-//   ChevronRight,
-//   Pill,
-//   Truck,
-//   Clock,
-//   Sparkles
-// } from "lucide-react"
-// import Link from "next/link"
-
-// const services = [
-//   {
-//     icon: Truck,
-//     title: "Free Delivery Service",
-//     description:
-//       "Enjoy fast, reliable home delivery of your prescriptions and health products at no extra cost convenient, secure, and right to your doorstep.",
-//     color: "from-neutral-900/12 to-neutral-900/5",
-//     accentColor: "text-neutral-900",
-//     badge: "Fast Track",
-//   },
-//   {
-//     icon: Clock,
-//     title: "Health Consultations",
-//     description:
-//       "Get personalized health advice from our experienced pharmacists for better wellness.",
-//     color: "from-neutral-700/12 to-neutral-700/5",
-//     accentColor: "text-neutral-800",
-//     badge: "Extended Hours",
-//   },
-//   {
-//     icon: Pill,
-//     title: "Prescription Services",
-//     description:
-//       "We provide accurate and timely prescription filling for your medications.",
-//     color: "from-neutral-800/12 to-neutral-800/5",
-//     accentColor: "text-neutral-900",
-//     badge: "Premium Service",
-//   },
-// ]
-
-// export default function ServicesCarousel() {
-//   const [current, setCurrent] = useState(0)
-//   const [isAutoPlay, setIsAutoPlay] = useState(true)
-//   const [direction, setDirection] = useState("right")
-
-//   useEffect(() => {
-//     if (!isAutoPlay) return
-//     const timer = setInterval(() => {
-//       setDirection("right")
-//       setCurrent((prev) => (prev + 1) % services.length)
-//     }, 6000)
-//     return () => clearInterval(timer)
-//   }, [isAutoPlay])
-
-//   const next = () => {
-//     setDirection("right")
-//     setCurrent((prev) => (prev + 1) % services.length)
-//     setIsAutoPlay(false)
-//   }
-
-//   const prev = () => {
-//     setDirection("left")
-//     setCurrent((prev) => (prev - 1 + services.length) % services.length)
-//     setIsAutoPlay(false)
-//   }
-
-//   return (
-//     <section
-//       id="services"
-//       className="relative py-24 bg-gradient-to-b from-background via-background to-white/60 overflow-hidden"
-//     >
-//       {/* GRAY BLOBS */}
-//       <div className="absolute top-40 right-0 w-96 h-96 bg-neutral-900/5 rounded-full blur-3xl" />
-//       <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-neutral-700/5 rounded-full blur-3xl" />
-
-//       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-//         {/* HEADER */}
-//         <div className="text-center mb-20 animate-slideInUp space-y-4">
-
-//           <div className="inline-flex items-center gap-2 bg-neutral-900/10 px-4 py-2 rounded-full border border-neutral-900/20">
-//             <Sparkles className="w-4 h-4 text-neutral-800" />
-//             <span className="text-sm font-semibold text-neutral-800">
-//               WHY CHOOSE US
-//             </span>
-//           </div>
-
-//           <h2 className="hero-title serif-heading leading-tight">
-//             <span className="text-foreground">What We </span>
-//             <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-neutral-600">
-//               Offer
-//             </span>
-//           </h2>
-
-//           <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
-//             Experience exceptional healthcare solutions designed to exceed your expectations and ensure your wellness.
-//           </p>
-//         </div>
-
-//         {/* CAROUSEL */}
-//         <div className="relative animate-fadeInScale">
-//           <div className="overflow-hidden rounded-3xl">
-//             <div
-//               className="flex transition-all duration-700 ease-out"
-//               style={{ transform: `translateX(-${current * 100}%)` }}
-//             >
-//               {services.map((service, index) => {
-//                 const Icon = service.icon
-//                 return (
-//                   <div key={index} className="w-full flex-shrink-0">
-//                     <div
-//                       className={`bg-gradient-to-br ${service.color} rounded-3xl p-12 md:p-16 lg:p-20 border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-500`}
-//                     >
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-//                         {/* ICON SIDE */}
-//                         <div className="flex flex-col items-start gap-8">
-//                           <div className="px-3 py-1.5 bg-white/50 border border-neutral-300 rounded-full text-xs font-semibold tracking-wide text-foreground">
-//                             {service.badge}
-//                           </div>
-
-//                           <div className="animate-float">
-//                             <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-white/70 to-white/30 rounded-3xl flex items-center justify-center shadow-lg backdrop-blur-sm border border-neutral-300">
-//                               <Icon
-//                                 className={`${service.accentColor} w-12 h-12 md:w-16 md:h-16`}
-//                               />
-//                             </div>
-//                           </div>
-//                         </div>
-
-//                         {/* TEXT */}
-//                         <div className="space-y-6">
-//                           <h3 className="text-4xl md:text-5xl font-bold serif-heading text-foreground leading-tight">
-//                             {service.title}
-//                           </h3>
-
-//                           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
-//                             {service.description}
-//                           </p>
-
-//                           <Link href="/ALLservice">
-//                             <button className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-xl hover:bg-neutral-800 transition-all duration-300 hover:-translate-y-1 mt-2">
-//                               Learn More
-//                               <ChevronRight className="w-4 h-4" />
-//                             </button>
-//                           </Link>
-//                         </div>
-
-//                       </div>
-//                     </div>
-//                   </div>
-//                 )
-//               })}
-//             </div>
-//           </div>
-
-//           {/* NAV BUTTONS */}
-//           <button
-//             onClick={prev}
-//             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 md:-translate-x-16 lg:-translate-x-20 bg-black text-white rounded-full p-4 hover:bg-neutral-800 transition-all duration-300 z-10 group"
-//           >
-//             <ChevronLeft className="w-6 h-6 group-hover:scale-125 transition-transform" />
-//           </button>
-
-//           <button
-//             onClick={next}
-//             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-8 md:translate-x-16 lg:translate-x-20 bg-black text-white rounded-full p-4 hover:bg-neutral-800 transition-all duration-300 z-10 group"
-//           >
-//             <ChevronRight className="w-6 h-6 group-hover:scale-125 transition-transform" />
-//           </button>
-
-//           {/* DOTS */}
-//           <div className="flex justify-center gap-4 mt-12">
-//             {services.map((_, index) => (
-//               <button
-//                 key={index}
-//                 onClick={() => {
-//                   setCurrent(index)
-//                   setIsAutoPlay(false)
-//                 }}
-//                 className={`transition-all duration-500 rounded-full ${
-//                   index === current
-//                     ? "bg-black w-12 h-4 shadow-lg"
-//                     : "bg-neutral-300 w-4 h-4 hover:bg-neutral-500 hover:scale-125"
-//                 }`}
-//               />
-//             ))}
-//           </div>
-
-//           <div className="text-center mt-8 text-muted-foreground text-sm font-medium">
-//             <span className="text-neutral-900 font-semibold">
-//               {current + 1}
-//             </span>{" "}
-//             of {services.length}
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
