@@ -53,7 +53,7 @@ export default function Navigation() {
                 href="tel:+19734829300"
                 className="underline font-bold hover:text-blue-700"
               >
-                Call +19734829300
+                Call (973) 482-9300
               </a>
             </p>
 
