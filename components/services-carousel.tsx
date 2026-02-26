@@ -18,20 +18,23 @@ export default function RotatingCards() {
     <section className="max-w-7xl mx-auto px-4 py-12">
       <div className="flex flex-col md:flex-row items-center gap-4">
         {/* Left content */}
-        <div className="w-full md:w-1/3 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 bg-neutral-900/10 px-4 py-2 rounded-full border border-neutral-900/10 mb-4">
-            <span className="text-sm font-semibold">WHY CHOOSE US</span>
-          </div>
+        <div className="w-full md:w-1/3 text-center md:text-left flex flex-col justify-center">
+  <div className="inline-flex items-center justify-center md:justify-start gap-2 bg-neutral-900/10 px-4 py-1.5 rounded-full border border-neutral-900/10 mb-4 w-fit mx-auto md:mx-0">
+    <span className="text-xs font-semibold tracking-widest text-neutral-700">
+      WHY CHOOSE US
+    </span>
+  </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            What We Provide
-          </h2>
+  <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-4 whitespace-nowrap">
+    What We Provide
+  </h2>
 
-          <p className="text-base text-muted-foreground max-w-prose leading-relaxed">
-            Experience exceptional healthcare solutions designed to exceed your
-            expectations and ensure your wellness.
-          </p>
-        </div>
+  <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto md:mx-0 leading-relaxed translate-x-4">
+    Experience exceptional healthcare solutions designed to exceed your
+    expectations and ensure your wellness.
+  </p>
+</div>
+
 
         {/* Right: rotating cards + center logo */}
         <div className="w-full md:w-2/3">
@@ -212,6 +215,7 @@ export default function RotatingCards() {
               0px 18px 36px -18px rgba(12, 5, 46, 0.3),
               0px 30px 60px -12px rgba(12, 5, 46, 0.25);
             border-radius: 50%;
+           
           }
 
           .second-circle {

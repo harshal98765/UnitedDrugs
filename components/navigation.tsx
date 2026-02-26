@@ -168,7 +168,7 @@ export default function Navigation() {
             <div className="md:hidden relative overflow-hidden rounded-b-2xl animate-slideInUp">
               <div className="absolute inset-0 bg-gradient-to-r from-[#0B2C4D] via-[#0E3A66] to-[#0B2C4D]" />
 
-              <div className="relative z-10 px-2 pb-6 pt-4 ">
+              <div className="relative z-10 px-2 pb-6 pt-4 bg-gradient-to-b from-[#007cc4] to-[#d6d7d8]">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}

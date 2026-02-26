@@ -292,19 +292,10 @@ input[type="date"]:not([value=""]) + span {
   opacity: 0;
 }
 
-/* ===============================
-   ALERT SLIDING ANIMATION
-   =============================== */
-
-/* @keyframes slide-left {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
+@media (max-width: 640px) {
+  .last-circle,
+  .second-circle,
+  .center-circle {
+    display: none;
   }
 }
-
-.animate-slide-left {
-  animation: slide-left 15s linear infinite;
-} */
