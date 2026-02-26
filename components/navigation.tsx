@@ -138,14 +138,18 @@ export default function Navigation() {
               {/* CTA */}
               <a
                 href="tel:++19734829300"
-                className="flex items-center gap-3 text-[#0B2C4D] px-5 py-2.5 rounded-lg shadow"
+                className="flex items-center gap-3 text-gray-800 bg-white px-5 py-2.5 rounded-lg shadow"
               >
-                <span className="p-2 rounded-md">
+                <span className="p-2 text-gray-800 rounded-md">
                   <Phone size={18} />
                 </span>
                 <div className="leading-tight">
-                  <p className="text-sm font-semibold">Free Consultation</p>
-                  <p className="text-xs opacity-90">+19734829300</p>
+                  <p className="text-sm font-semibold text-gray-800">
+                    Free Consultation
+                  </p>
+                  <p className="text-xs opacity-90 text-gray-800">
+                    (973) 482-9300
+                  </p>
                 </div>
               </a>
             </div>
@@ -162,7 +166,7 @@ export default function Navigation() {
           {/* ================= MOBILE MENU ================= */}
           {isOpen && (
             <div className="md:hidden relative overflow-hidden rounded-b-2xl animate-slideInUp">
-              {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0B2C4D] via-[#0E3A66] to-[#0B2C4D]" /> */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B2C4D] via-[#0E3A66] to-[#0B2C4D]" />
 
               <div className="relative z-10 px-2 pb-6 pt-4 ">
                 {navItems.map((item) => (
@@ -178,10 +182,13 @@ export default function Navigation() {
 
                 <a
                   href="tel:+12014348062"
-                  className="mt-4 flex items-center justify-center gap-2 text-gray-800 px-3 py-3 rounded-xl shadow hover:bg-blue-100"
+                  className="mt-4 flex bg-white items-center justify-center gap-2 text-gray-800 px-3 py-3 rounded-xl shadow hover:bg-blue-100"
                 >
-                  <Phone size={18} />
-                  Free Consultation — +1 201-434-8062
+                  <Phone size={18} className="text-gray-800" />
+
+                  <p className="text-sm font-semibold text-gray-800">
+                    Free Consultation — (973) 482-9300
+                  </p>
                 </a>
               </div>
             </div>

@@ -211,45 +211,51 @@
 //   )
 // }
 
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { ArrowLeft, ArrowRight, Pill, ClipboardList, HeartPulse, ShieldCheck } from 'lucide-react'
+import { useState } from "react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Pill,
+  ClipboardList,
+  HeartPulse,
+  ShieldCheck,
+} from "lucide-react";
 
 export default function WhatWeOfferSection() {
   const offers = [
     {
-      image: '/medicine01.png',
-      title: 'Precision Compounding',
+      image: "/medicine01.png",
+      title: "Precision Compounding",
       description:
-        'Custom-formulated medications crafted specifically for your health requirements and sensitivities',
+        "Custom-formulated medications crafted specifically for your health requirements and sensitivities",
       icon: Pill,
     },
     {
-      image: '/checkup01.png',
-      title: 'Generic Plan',
+      image: "/checkup01.png",
+      title: "Generic Plan",
       description:
-        'Cost-effective generic alternatives without compromising on quality or efficacy for common conditions',
+        "Cost-effective generic alternatives without compromising on quality or efficacy for common conditions",
       icon: ClipboardList,
     },
     {
-      image: '/vaccin01.png',
-      title: 'Care Support',
+      image: "/vaccin01.png",
+      title: "Care Support",
       description:
-        'Expert guidance for managing diabetes, hypertension, thyroid disorders, and other long-term conditions',
+        "Expert guidance for managing diabetes, hypertension, thyroid disorders, and other long-term conditions",
       icon: HeartPulse,
     },
-  ]
+  ];
 
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(1);
 
-  const prev = () => setActive((p) => (p === 0 ? offers.length - 1 : p - 1))
-  const next = () => setActive((p) => (p === offers.length - 1 ? 0 : p + 1))
+  const prev = () => setActive((p) => (p === 0 ? offers.length - 1 : p - 1));
+  const next = () => setActive((p) => (p === offers.length - 1 ? 0 : p + 1));
 
   return (
     <section className="py-18  bg-gradient-to-b from-white via-[#f6f9fe] to-white">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* HEADER */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-blue-50 border border-blue-100 mb-6">
@@ -264,24 +270,23 @@ export default function WhatWeOfferSection() {
           </h2>
 
           <p className="text-xl md:text-xl text-slate-600 mt-6 max-w-xl mx-auto leading-relaxed">
-            Professional pharmacy services designed to support your long-term health and wellbeing.
+            Professional pharmacy services designed to support your long-term
+            health and wellbeing.
           </p>
         </div>
 
         {/* ================= MOBILE SLIDER ================= */}
         <div className="block md:hidden relative">
-
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex my-4 transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${active * 100}%)` }}
             >
               {offers.map((offer, index) => {
-                const Icon = offer.icon
+                const Icon = offer.icon;
                 return (
                   <div key={index} className="min-w-full px-4">
                     <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl p-10 h-[460px] flex flex-col justify-between">
-
                       <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center">
                         <Icon className="w-10 h-10 text-blue-700" />
                       </div>
@@ -300,7 +305,7 @@ export default function WhatWeOfferSection() {
                       </div>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -322,7 +327,6 @@ export default function WhatWeOfferSection() {
 
         {/* ================= DESKTOP ================= */}
         <div className="hidden md:flex relative items-center justify-center gap-12">
-
           <button
             onClick={prev}
             className="absolute left-0 z-20 bg-white border border-slate-200 shadow-xl rounded-full p-4 hover:bg-blue-50 transition"
@@ -332,8 +336,8 @@ export default function WhatWeOfferSection() {
 
           <div className="flex gap-12 transition-all duration-700">
             {offers.map((offer, index) => {
-              const isActive = index === active
-              const Icon = offer.icon
+              const isActive = index === active;
+              const Icon = offer.icon;
 
               return (
                 <div
@@ -342,7 +346,7 @@ export default function WhatWeOfferSection() {
                   className={`
                     bg-white border border-slate-200 rounded-[2.5rem] cursor-pointer
                     shadow-xl transition-all duration-700
-                    ${isActive ? 'scale-105 opacity-100 ring-4 ring-blue-200' : 'scale-95 opacity-60'}
+                    ${isActive ? "scale-105 opacity-100 ring-4 ring-blue-200" : "scale-95 opacity-60"}
                   `}
                   style={{
                     width: 360,
@@ -350,7 +354,6 @@ export default function WhatWeOfferSection() {
                   }}
                 >
                   <div className="h-full p-10 flex flex-col justify-between">
-
                     <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center">
                       <Icon className="w-10 h-10 text-blue-700" />
                     </div>
@@ -372,7 +375,7 @@ export default function WhatWeOfferSection() {
                     </div>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -391,13 +394,12 @@ export default function WhatWeOfferSection() {
               key={i}
               onClick={() => setActive(i)}
               className={`h-3 rounded-full transition-all
-                ${i === active ? 'bg-blue-700 w-10' : 'bg-blue-200 w-3'}
+                ${i === active ? "bg-blue-700 w-10" : "bg-blue-200 w-3"}
               `}
             />
           ))}
         </div>
-
       </div>
     </section>
-  )
+  );
 }

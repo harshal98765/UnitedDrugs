@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import {
   ChevronDown,
   Pill,
@@ -9,7 +9,7 @@ import {
   Beaker,
   Truck,
   Phone,
-} from "lucide-react"
+} from "lucide-react";
 
 const faqSections = [
   {
@@ -17,14 +17,14 @@ const faqSections = [
     icon: Pill,
     faqs: [
       {
-        q: "How do I fill my prescriptions at Bergen Road Pharmacy?",
+        q: "How do I fill my prescriptions at United Drugs Pharmacy?",
         a: `You can fill your prescriptions in several ways:
-• Ask your doctor to send prescriptions directly to Bergen Road Pharmacy
+• Ask your doctor to send prescriptions directly to United Drugs Pharmacy
 • Request a transfer from your current pharmacy
 • Contact our pharmacy and we will coordinate the transfer for you`,
       },
       {
-        q: "Is there a fee to sign up or use Bergen Road Pharmacy?",
+        q: "Is there a fee to sign up or use United Drugs Pharmacy?",
         a: "No. There is no fee to sign up or use our pharmacy services. We welcome patients with or without insurance, and delivery is available at no additional charge for eligible prescriptions.",
       },
     ],
@@ -137,10 +137,10 @@ const faqSections = [
     icon: Phone,
     faqs: [
       {
-        q: "How can I contact Bergen Road Pharmacy?",
+        q: "How can I contact United Drugs Pharmacy?",
         a: `You may contact us using the details below:
 
-Bergen Road Pharmacy  
+United Drugs Pharmacy  
 239 Old Bergen Rd  
 Jersey City, NJ 07305, United States  
 
@@ -148,15 +148,14 @@ Jersey City, NJ 07305, United States
       },
     ],
   },
-]
+];
 
 export default function FaqSection() {
-  const [open, setOpen] = useState<string | null>(null)
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
     <section className="py-24 bg-gradient-to-b from-background to-white">
       <div className="max-w-5xl mx-auto px-4">
-
         <div className="text-center mb-16 space-y-4">
           <h2 className="hero-title leading-tight">
             Frequently Asked{" "}
@@ -173,7 +172,7 @@ export default function FaqSection() {
 
         <div className="space-y-10">
           {faqSections.map((section, idx) => {
-            const Icon = section.icon
+            const Icon = section.icon;
 
             return (
               <div key={idx}>
@@ -188,8 +187,8 @@ export default function FaqSection() {
 
                 <div className="space-y-3">
                   {section.faqs.map((faq, i) => {
-                    const key = `${idx}-${i}`
-                    const isOpen = open === key
+                    const key = `${idx}-${i}`;
+                    const isOpen = open === key;
 
                     return (
                       <div
@@ -197,9 +196,7 @@ export default function FaqSection() {
                         className="border border-border rounded-2xl bg-white shadow-sm overflow-hidden"
                       >
                         <button
-                          onClick={() =>
-                            setOpen(isOpen ? null : key)
-                          }
+                          onClick={() => setOpen(isOpen ? null : key)}
                           className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-muted/40 transition"
                         >
                           <span className="font-medium text-foreground">
@@ -218,14 +215,14 @@ export default function FaqSection() {
                           </div>
                         )}
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

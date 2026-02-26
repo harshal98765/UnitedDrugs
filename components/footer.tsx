@@ -273,7 +273,7 @@ export default function Footer() {
               {legalType === "contact" && (
                 <>
                   <p className="font-semibold text-gray-900">
-                    Bergen Road Pharmacy
+                    United Drugs Pharmacy
                   </p>
                   <p>
                     Phone:{" "}
@@ -281,7 +281,7 @@ export default function Footer() {
                       href="tel:+19734829300"
                       className="text-blue-600 underline"
                     >
-                      +1 9734829300
+                      (973) 482-9300
                     </a>
                   </p>
                   <p>
