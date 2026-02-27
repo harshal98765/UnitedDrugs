@@ -60,6 +60,13 @@ export default function SavingsCopayHelp() {
   //     setLoading(false)
   //   }
   // }
+const [insuranceFile, setInsuranceFile] = useState<File | null>(null);
+
+const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  if (e.target.files && e.target.files[0]) {
+    setInsuranceFile(e.target.files[0]);
+  }
+};
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -292,23 +299,47 @@ export default function SavingsCopayHelp() {
 
                 <input
                   name="approximatePrice"
-                  placeholder="Approximate price paid or quoted (optional)"
+                  placeholder="Approx. price paid or quoted (optional)"
                   className={inputStyle}
                 />
               </div>
 
-              <label className="mt-5 flex items-center justify-center gap-3 border-2 border-dashed border-[#CFE6FF] rounded-xl p-6 cursor-pointer hover:bg-[#F5FAFF] transition">
-                <Upload className="w-6 h-6 text-[#1E5FA8]" />
-                <span className="text-[#1E5FA8] font-medium">
-                  Upload insurance card (optional)
-                </span>
-                <input
-                  type="file"
-                  name="insuranceCard"
-                  accept="image/*,.pdf"
-                  hidden
-                />
-              </label>
+              <label className="mt-5 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-[#CFE6FF] rounded-xl p-6 cursor-pointer hover:bg-[#F5FAFF] transition relative">
+
+  {!insuranceFile ? (
+    <>
+      <Upload className="w-6 h-6 text-[#1E5FA8]" />
+      <span className="text-[#1E5FA8] font-medium">
+        Upload insurance card (optional)
+      </span>
+    </>
+  ) : (
+    <div className="flex items-center gap-2 text-green-600 font-medium">
+      <CheckCircle className="w-5 h-5" />
+      <span className="truncate max-w-[220px]">
+        {insuranceFile.name}
+      </span>
+    </div>
+  )}
+
+  <input
+    type="file"
+    name="insuranceCard"
+    accept="image/*,.pdf"
+    hidden
+    onChange={handleFileChange}
+  />
+</label>
+
+{insuranceFile && (
+  <button
+    type="button"
+    onClick={() => setInsuranceFile(null)}
+    className="mt-2 text-sm text-red-500 hover:text-red-700"
+  >
+    Remove file
+  </button>
+)}
             </div>
 
             {/* ===== CONSENT ===== */}

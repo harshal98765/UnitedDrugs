@@ -175,7 +175,7 @@ export default function HeroSection() {
                   setRxNumber(e.target.value);
                   setError("");
                 }}
-                placeholder="Enter RX numbers separated by commas"
+                placeholder="Enter RX numbers"
                 className="w-full border border-slate-300 rounded-xl px-4 py-3 text-center font-semibold tracking-wide focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
 
