@@ -107,7 +107,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <p className="font-bold text-slate-900">Call Us</p>
-                  <p className="text-sm text-slate-600">+19734829300</p>
+                  <p className="text-sm text-slate-600">(973) 482-9300</p>
                   <p className="text-xs text-slate-500">
                     Extended hours support
                   </p>

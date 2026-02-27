@@ -87,9 +87,9 @@
 //   )
 // }
 
-"use client"
+"use client";
 
-import { Shield, Users, Award, Leaf, CheckCircle2 } from "lucide-react"
+import { Shield, Users, Award, Leaf, CheckCircle2 } from "lucide-react";
 
 const features = [
   {
@@ -105,14 +105,16 @@ const features = [
   {
     icon: Shield,
     title: "Security First",
-    description: "HIPAA-compliant systems protecting your personal health information",
+    description:
+      "HIPAA-compliant systems protecting your personal health information",
   },
   {
     icon: Leaf,
     title: "Care & Compassion",
-    description: "Patient-centered approach to every interaction and prescription",
+    description:
+      "Patient-centered approach to every interaction and prescription",
   },
-]
+];
 
 export default function FeaturesSection() {
   return (
@@ -125,20 +127,18 @@ export default function FeaturesSection() {
       <div className="absolute -bottom-24 -right-24 w-[420px] h-[420px] bg-[#1E5FA8]/10 rounded-full blur-3xl" />
 
       {/* SECTION HEADING (ABOVE ALL BOXES) */}
-<div className="text-center mb-16">
-  <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
-    Why <span className="text-blue-700">Choose Us</span>
-  </h2>
-  <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-    Trusted care, clinical expertise, and modern pharmacy services.
-  </p>
-</div>
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900">
+          Why <span className="text-blue-700">Choose Us</span>
+        </h2>
+        <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+          Trusted care, clinical expertise, and modern pharmacy services.
+        </p>
+      </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-
           {/* LEFT – INTRO PANEL */}
           <div className="lg:col-span-5">
             <div className="bg-white rounded-3xl border border-blue-100 shadow-xl p-10 h-full flex flex-col justify-between">
@@ -157,14 +157,16 @@ export default function FeaturesSection() {
                 </h2>
 
                 <p className="text-slate-600 text-lg leading-relaxed">
-                  We combine clinical expertise, modern technology, and genuine care to deliver a pharmacy experience that’s reliable, secure, and personal.
+                  We combine clinical expertise, modern technology, and genuine
+                  care to deliver a pharmacy experience that’s reliable, secure,
+                  and personal.
                 </p>
               </div>
 
               {/* Stats / Highlights */}
               <div className="grid grid-cols-2 gap-6 mt-5 pt-5 border-t border-slate-200">
                 <div>
-                  <p className="text-2xl font-bold text-slate-900">10+ Years</p>
+                  <p className="text-2xl font-bold text-slate-900">30+ Years</p>
                   <p className="text-sm text-slate-600">Industry Experience</p>
                 </div>
                 <div>
@@ -178,7 +180,7 @@ export default function FeaturesSection() {
           {/* RIGHT – FEATURE TILES */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {features.map((feature, index) => {
-              const Icon = feature.icon
+              const Icon = feature.icon;
 
               return (
                 <div
@@ -204,12 +206,11 @@ export default function FeaturesSection() {
                     {feature.description}
                   </p>
                 </div>
-              )
+              );
             })}
           </div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }
